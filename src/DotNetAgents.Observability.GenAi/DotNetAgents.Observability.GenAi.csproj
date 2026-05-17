@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <RootNamespace>DotNetAgents.Observability.GenAi</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>OpenTelemetry GenAI semantic-convention emitters for DotNetAgents. Story 40a4ebf1 (Phase 2B). Activity-source helpers for LLM calls, agent tasks, tool use, framework spans, routing decisions; attribute names per the OTEL ratified GenAI semconv.</Description>
+    <PackageTags>DotNetAgents;OpenTelemetry;GenAI;observability;semconv</PackageTags>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetAgents.Observability\DotNetAgents.Observability.csproj" />
+  </ItemGroup>
+
+</Project>

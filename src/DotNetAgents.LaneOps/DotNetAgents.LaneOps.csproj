@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <RootNamespace>DotNetAgents.LaneOps</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>Automated worker operations primitives. RunnerClass taxonomy + RunnerRoutingPolicy that maps a work-order's workload class + autonomy tier + risk profile to a runner class with structural RouteRefused refusal for unsafe combinations. Pure-records + static rule; no dependencies on application or infrastructure layers.</Description>
+    <PackageTags>DotNetAgents;lane-ops;routing;autonomous-mode</PackageTags>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+</Project>

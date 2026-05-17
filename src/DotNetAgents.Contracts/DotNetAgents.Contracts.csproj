@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>Shared agent/service contract metadata for DNA services. Canonical GeneticContractReader that loads the per-service `dna.genetic.json` file and exposes the raw JSON plus common metadata (service name, ring, description) so services can adopt one implementation instead of duplicating the bootstrap pattern. Companion to DotNetAgents.Mcp.Models (bootstrap surface) and DotNetAgents.Mcp.Conformance (test surface).</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.5" />
+  </ItemGroup>
+
+</Project>

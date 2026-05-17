@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>Stdio MCP transport for DotNetAgents. Reusable McpStdioServer generalizes the AiSessionPersistence stdio binary pattern so any DNA service can expose its IMcpToolProvider over JSON-RPC 2.0 on stdin/stdout — useful for local-dev MCP clients, containerized per-request processes, or environments without HTTP.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetAgents.Mcp\DotNetAgents.Mcp.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Mcp.Server\DotNetAgents.Mcp.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="DotNetAgents.Mcp.Stdio.Tests" />
+  </ItemGroup>
+
+</Project>

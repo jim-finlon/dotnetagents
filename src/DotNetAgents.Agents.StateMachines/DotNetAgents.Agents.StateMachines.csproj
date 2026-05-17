@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetAgents.Abstractions\DotNetAgents.Abstractions.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Registry\DotNetAgents.Agents.Registry.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Messaging\DotNetAgents.Agents.Messaging.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.WorkerPool\DotNetAgents.Agents.WorkerPool.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Observability\DotNetAgents.Observability.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Workflow\DotNetAgents.Workflow.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Ecosystem\DotNetAgents.Ecosystem.csproj" />
+  </ItemGroup>
+
+</Project>

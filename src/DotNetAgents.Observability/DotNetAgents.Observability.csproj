@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetAgents.Core\DotNetAgents.Core.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Messaging\DotNetAgents.Agents.Messaging.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Registry\DotNetAgents.Agents.Registry.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Tasks\DotNetAgents.Agents.Tasks.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.WorkerPool\DotNetAgents.Agents.WorkerPool.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.5" />
+    <PackageReference Include="OpenTelemetry" Version="1.15.3" />
+    <PackageReference Include="OpenTelemetry.Api" Version="1.15.3" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.15.3" />
+  </ItemGroup>
+
+</Project>

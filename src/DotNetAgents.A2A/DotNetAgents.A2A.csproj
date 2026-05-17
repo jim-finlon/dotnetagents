@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <RootNamespace>DotNetAgents.A2A</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>A2A protocol: agent card, skills, task handling. FR-A2A-001 to FR-A2A-002.</Description>
+    <PackageTags>DotNetAgents;AI;A2A;agent-card</PackageTags>
+  </PropertyGroup>
+
+</Project>

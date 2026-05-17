@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <IsPackable>true</IsPackable>
+    <PackageId>DotNetAgents</PackageId>
+    <Description>Metapackage that references many DotNetAgents library packages for convenience; it is not an MCP host—use DotNetAgents.Mcp / DotNetAgents.Mcp.Server in an application project or the dna-service template.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <ProjectReference Include="..\DotNetAgents.Abstractions\DotNetAgents.Abstractions.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Core\DotNetAgents.Core.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Documents\DotNetAgents.Documents.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Workflow\DotNetAgents.Workflow.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Tasks\DotNetAgents.Tasks.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Knowledge\DotNetAgents.Knowledge.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Configuration\DotNetAgents.Configuration.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Observability\DotNetAgents.Observability.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Security\DotNetAgents.Security.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Ecosystem\DotNetAgents.Ecosystem.csproj" />
+
+
+    <ProjectReference Include="..\DotNetAgents.Agents.StateMachines\DotNetAgents.Agents.StateMachines.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.BehaviorTrees\DotNetAgents.Agents.BehaviorTrees.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Swarm\DotNetAgents.Agents.Swarm.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Hierarchical\DotNetAgents.Agents.Hierarchical.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Agents.Marketplace\DotNetAgents.Agents.Marketplace.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Mcp\DotNetAgents.Mcp.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Edge\DotNetAgents.Edge.csproj" />
+
+
+
+
+
+
+    </ItemGroup>
+
+</Project>

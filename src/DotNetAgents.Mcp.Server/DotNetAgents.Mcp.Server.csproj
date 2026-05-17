@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>ASP.NET Core hosting for MCP (Model Context Protocol) tool endpoints. Expose GET /mcp/tools and POST /mcp/tools/call so DotNetAgents.Mcp client can discover and call tools. Use from any agent (TimeManagement, BusinessAgent, etc.) that implements IMcpToolProvider.</Description>
+    <PackageTags>$(PackageTags);mcp;server;hosting</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.2.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetAgents.Mcp\DotNetAgents.Mcp.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Mcp.Auth\DotNetAgents.Mcp.Auth.csproj" />
+    </ItemGroup>
+
+</Project>

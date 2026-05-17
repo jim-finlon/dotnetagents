@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <RootNamespace>DotNetAgents.AgenticRAG</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>Agentic RAG: Self-RAG, Corrective RAG, Adaptive RAG, HyDE. FR-RAG-001 to FR-RAG-004.</Description>
+    <PackageTags>DotNetAgents;AI;RAG;retrieval;self-rag;hyde</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetAgents.Abstractions\DotNetAgents.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

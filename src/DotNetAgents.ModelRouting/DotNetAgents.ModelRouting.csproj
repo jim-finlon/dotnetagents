@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <RootNamespace>DotNetAgents.ModelRouting</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>Model routing: cascade routing, capability-based selection. FR-MR-001 to FR-MR-003.</Description>
+    <PackageTags>DotNetAgents;AI;routing;cascade;capability</PackageTags>
+  </PropertyGroup>
+
+  <!-- No dependency on Abstractions; routing is independent. -->
+
+</Project>
