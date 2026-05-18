@@ -2,7 +2,7 @@ namespace DotNetAgents.Abstractions.PublicSubstitutes.Memory;
 
 /// <summary>
 /// Public durable-memory lesson payload for open-core agents and examples.
-/// Premium/private systems can adapt this contract to KnowledgeMemory without
+/// Premium/private systems can adapt this contract to knowledge-memory service without
 /// exposing private factory storage details.
 /// </summary>
 public sealed record PublicLessonRecord(

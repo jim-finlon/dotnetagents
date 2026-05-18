@@ -51,7 +51,7 @@ public static class McpAuthServerExtensions
     /// </summary>
     /// <param name="endpoints">Routing builder.</param>
     /// <param name="serviceName">
-    /// Display name shown on the consent page (e.g. "CredentialsAgent").
+    /// Display name shown on the consent page (e.g. "credential resolver").
     /// Defaults to "DNA MCP" so existing callers compile without changes.
     /// </param>
     public static IEndpointRouteBuilder MapMcpAuth(

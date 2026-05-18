@@ -15,16 +15,16 @@ namespace DotNetAgents.Mcp.Configuration;
 ///     "Enabled": true,
 ///     "TimeoutMs": 1500,
 ///     "Targets": [
-///       { "Kind": "KnowledgeMemory",          "Url": "https://knowledge-memory.local",        "ApiKeyRef": "creds://KnowledgeMemoryApi" },
-///       { "Kind": "SessionPersistence","Url": "https://sessions.local"        },
-///       { "Kind": "EvaluationSandbox",       "Url": "https://evaluationsandbox.local",     "ApiKey": "literal-key" },
+///       { "Kind": "KnowledgeMemory",   "Url": "https://knowledge-memory.local", "ApiKeyRef": "creds://KnowledgeMemoryApi" },
+///       { "Kind": "SessionStore",      "Url": "https://sessions.local" },
+///       { "Kind": "EvaluationSandbox", "Url": "https://evaluation.local",       "ApiKey": "literal-key" },
 ///       { "Kind": "Custom", "Name": "my-target", "Url": "https://my.local" }
 ///     ]
 ///   }
 ///
 /// Each target's API key resolves through whichever <see cref="IApiKeyResolver"/>
-/// is registered. Hosts that integrate CredentialsAgent register a resolver that
-/// reads "creds://Category/Name" refs; hosts without one fall back to literal
+/// is registered. Hosts that integrate a credential resolver register an implementation
+/// that reads "creds://Category/Name" refs; hosts without one fall back to literal
 /// ApiKey values from config.
 /// </summary>
 public static class LearningProjectionBinder
@@ -35,7 +35,7 @@ public static class LearningProjectionBinder
     /// Bind from an IConfiguration section. Resolves API keys through whichever
     /// <see cref="IApiKeyResolver"/> is registered (or falls back to literal
     /// ApiKey values when none is present). Names are auto-assigned from Kind
-    /// when omitted (KnowledgeMemory/SessionPersistence/EvaluationSandbox); Custom targets
+    /// when omitted (KnowledgeMemory/SessionStore/EvaluationSandbox); Custom targets
     /// must supply Name explicitly.
     /// </summary>
     public static IServiceCollection AddLearningProjectionFromConfiguration(
@@ -74,8 +74,9 @@ public static class LearningProjectionBinder
         ArgumentNullException.ThrowIfNull(spec);
         ArgumentNullException.ThrowIfNull(resolver);
 
+        var kind = ParseTargetKind(spec.Kind);
         var name = string.IsNullOrWhiteSpace(spec.Name)
-            ? KindToName(spec.Kind) ?? throw new InvalidOperationException("Custom targets require an explicit Name.")
+            ? KindToName(kind) ?? throw new InvalidOperationException("Custom targets require an explicit Name.")
             : spec.Name;
 
         if (string.IsNullOrWhiteSpace(spec.Url))
@@ -95,17 +96,37 @@ public static class LearningProjectionBinder
         };
     }
 
+    /// <summary>Parse configuration Kind strings (neutral public names plus legacy private-factory aliases).</summary>
+    public static LearningProjectionTargetKind ParseTargetKind(string? kind) =>
+        kind?.Trim() switch
+        {
+            null or "" => LearningProjectionTargetKind.Custom,
+            "Custom" or "custom" => LearningProjectionTargetKind.Custom,
+            "KnowledgeMemory" or "knowledge-memory" => LearningProjectionTargetKind.KnowledgeMemory,
+            "SessionStore" or "session-store" or "SessionPersistence" or "session-persistence" => LearningProjectionTargetKind.SessionStore,
+            "EvaluationSandbox" or "evaluation-sandbox" => LearningProjectionTargetKind.EvaluationSandbox,
+            _ => Enum.TryParse<LearningProjectionTargetKind>(kind, ignoreCase: true, out var parsed)
+                ? parsed
+                : LearningProjectionTargetKind.Custom,
+        };
+
     private static string? KindToName(LearningProjectionTargetKind kind) => kind switch
     {
         LearningProjectionTargetKind.KnowledgeMemory => "knowledge-memory",
-        LearningProjectionTargetKind.SessionPersistence => "session-persistence",
+        LearningProjectionTargetKind.SessionStore => "session-store",
         LearningProjectionTargetKind.EvaluationSandbox => "evaluation-sandbox",
         LearningProjectionTargetKind.Custom => null,
         _ => null,
     };
 }
 
-public enum LearningProjectionTargetKind { Custom = 0, KnowledgeMemory = 1, SessionPersistence = 2, EvaluationSandbox = 3 }
+public enum LearningProjectionTargetKind
+{
+    Custom = 0,
+    KnowledgeMemory = 1,
+    SessionStore = 2,
+    EvaluationSandbox = 3,
+}
 
 public sealed class LearningProjectionConfigSection
 {
@@ -116,7 +137,9 @@ public sealed class LearningProjectionConfigSection
 
 public sealed class LearningProjectionTargetSpec
 {
-    public LearningProjectionTargetKind Kind { get; set; } = LearningProjectionTargetKind.Custom;
+    /// <summary>Target kind string from configuration (see <see cref="LearningProjectionBinder.ParseTargetKind"/>).</summary>
+    public string Kind { get; set; } = "Custom";
+
     public string? Name { get; set; }
     public bool Enabled { get; set; } = true;
     public string Url { get; set; } = string.Empty;
@@ -127,8 +150,8 @@ public sealed class LearningProjectionTargetSpec
 
 /// <summary>
 /// Resolves an API-key reference (e.g. "creds://Category/Name") into a literal
-/// API key string. Story e76fc19d. Hosts that integrate CredentialsAgent
-/// register an implementation that calls the agent; hosts without one rely on
+/// API key string. Story e76fc19d. Hosts that integrate a credential resolver
+/// register an implementation that calls the custody service; hosts without one rely on
 /// the default <see cref="PassthroughApiKeyResolver"/> which only handles
 /// literal values.
 /// </summary>
@@ -141,15 +164,13 @@ public interface IApiKeyResolver
 /// <summary>
 /// Default resolver that returns the reference unchanged when it doesn't look
 /// like a scheme-based ref ("foo://...") and null otherwise. Hosts replace
-/// this with a CredentialsAgent-backed resolver to get full ref handling.
+/// this with a credential-resolver-backed implementation to get full ref handling.
 /// </summary>
 public sealed class PassthroughApiKeyResolver : IApiKeyResolver
 {
     public string? Resolve(string reference)
     {
         if (string.IsNullOrWhiteSpace(reference)) return null;
-        // If the value looks like a scheme reference we cannot resolve, return null
-        // — caller's resolver should have handled it.
         return reference.Contains("://", StringComparison.Ordinal) ? null : reference;
     }
 }

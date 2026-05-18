@@ -5,8 +5,8 @@ namespace DotNetAgents.Mcp.Routing;
 /// (serialized to <see cref="Models.McpToolCallRequest.Arguments"/>).
 /// </summary>
 /// <remarks>
-/// JARVIS may add KnowledgeMemory keys on the same dictionary after recall:
-/// <c>hiveMindPattern</c>, <c>hiveMindResolution</c>, <c>hiveMindScore</c>.
+/// Voice hosts may add knowledge-memory keys on the same dictionary after recall:
+/// <c>memoryPattern</c>, <c>memoryResolution</c>, <c>memoryScore</c>.
 /// </remarks>
 public static class IntentParameterKeys
 {

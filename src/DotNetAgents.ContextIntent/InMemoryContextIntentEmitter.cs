@@ -5,7 +5,7 @@ namespace DotNetAgents.ContextIntent;
 /// <summary>
 /// Default in-memory implementation of <see cref="IContextIntentEmitter"/> + companion
 /// in-memory consumer registry. Real deployment uses a service-side implementation that
-/// persists envelopes into WorkflowService contribution_entry; this in-memory pair is for tests
+/// persists envelopes into workflow orchestrator contribution_entry; this in-memory pair is for tests
 /// and local development.
 /// </summary>
 public sealed class InMemoryContextIntentEmitter : IContextIntentEmitter

@@ -65,8 +65,6 @@ internal static class McpStreamableHttpCorsPolicy
             var host = uri.Host;
             if (host.Equals("localhost", StringComparison.OrdinalIgnoreCase) ||
                 host.Equals("127.0.0.1", StringComparison.OrdinalIgnoreCase) ||
-                host.Equals("tyr", StringComparison.OrdinalIgnoreCase) ||
-                host.StartsWith("192.168.", StringComparison.OrdinalIgnoreCase) ||
                 host.Equals("cursor.com", StringComparison.OrdinalIgnoreCase) ||
                 host.EndsWith(".cursor.com", StringComparison.OrdinalIgnoreCase))
                 return true;
@@ -75,10 +73,6 @@ internal static class McpStreamableHttpCorsPolicy
         if (o.StartsWith("cursor://", StringComparison.OrdinalIgnoreCase) ||
             o.StartsWith("vscode-file://", StringComparison.OrdinalIgnoreCase) ||
             o.StartsWith("vscode://", StringComparison.OrdinalIgnoreCase) ||
-            o.StartsWith("http://192.168.", StringComparison.OrdinalIgnoreCase) ||
-            o.StartsWith("https://192.168.", StringComparison.OrdinalIgnoreCase) ||
-            o.StartsWith("http://tyr", StringComparison.OrdinalIgnoreCase) ||
-            o.StartsWith("https://tyr", StringComparison.OrdinalIgnoreCase) ||
             o.StartsWith("https://cursor", StringComparison.OrdinalIgnoreCase) ||
             o.StartsWith("https://www.cursor", StringComparison.OrdinalIgnoreCase))
             return true;

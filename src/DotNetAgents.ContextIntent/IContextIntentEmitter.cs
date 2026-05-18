@@ -3,7 +3,7 @@ namespace DotNetAgents.ContextIntent;
 /// <summary>
 /// Emits a <see cref="ContextIntentEnvelope"/> at a handoff boundary (story claim, lane
 /// assignment, code review, deploy approval, MCP tool dispatch). Implementations route
-/// the envelope into evidence storage (WorkflowService contribution_entry) and notify any
+/// the envelope into evidence storage (workflow orchestrator contribution_entry) and notify any
 /// registered <see cref="IContextIntentConsumer"/> at the receive boundary.
 /// </summary>
 public interface IContextIntentEmitter

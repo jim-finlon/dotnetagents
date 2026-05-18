@@ -9,8 +9,8 @@ namespace DotNetAgents.Mcp.Adapters;
 /// Wraps one <see cref="McpToolDefinition"/> as an <see cref="ITool"/> so an
 /// <c>AgentExecutor</c>'s ReAct loop can invoke MCP tools without knowing about MCP.
 /// Per RW-5 (story e05c7b1e). Generic primitive — no role knowledge here; per-role allowlist
-/// + forbidden-tools deny-list enforcement live in the consuming layer (WorkflowService's
-/// <c>IRoleScopedMcpToolProvider</c>).
+/// + forbidden-tools deny-list enforcement live in the consuming layer (the host's
+/// role-scoped MCP tool provider).
 /// </summary>
 internal sealed class McpAgentTool : ITool
 {

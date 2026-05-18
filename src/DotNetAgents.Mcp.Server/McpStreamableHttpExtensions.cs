@@ -120,7 +120,7 @@ public static class McpStreamableHttpExtensions
                                 ".mcp.oauth.authorize",
                                 "AUTHORIZATION_NOT_SUPPORTED",
                                 null,
-                                "Configure X-Api-Key from CredentialsAgent or the local MCP client environment, then retry POST /mcp.",
+                                "Configure X-Api-Key from credential resolver or the local MCP client environment, then retry POST /mcp.",
                                 ["get_instructions", "retry_with_x_api_key"],
                                 new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                                 {

@@ -18,6 +18,9 @@
     <ProjectReference Include="..\DotNetAgents.Abstractions\DotNetAgents.Abstractions.csproj" />
     <ProjectReference Include="..\DotNetAgents.Core\DotNetAgents.Core.csproj" />
     <ProjectReference Include="..\DotNetAgents.Documents\DotNetAgents.Documents.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Tools.BuiltIn\DotNetAgents.Tools.BuiltIn.csproj" />
+
+
     <ProjectReference Include="..\DotNetAgents.Workflow\DotNetAgents.Workflow.csproj" />
     <ProjectReference Include="..\DotNetAgents.Tasks\DotNetAgents.Tasks.csproj" />
     <ProjectReference Include="..\DotNetAgents.Knowledge\DotNetAgents.Knowledge.csproj" />

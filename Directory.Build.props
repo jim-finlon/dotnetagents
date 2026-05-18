@@ -13,4 +13,16 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
+  <ItemGroup>
+    <!--
+      Pin System.Security.Cryptography.Xml to a patched release for the
+      DotNetAgents.Documents project. Without this pin the public-core build
+      surfaces NU1903 advisories (GHSA-37gx-xxp4-5rgx / GHSA-w3x6-4m5h-cxqf)
+      via the DocumentFormat.OpenXml transitive graph. Mirrors the private
+      DNA/Directory.Build.props pin; remove once upstream Document packages
+      stop pulling the vulnerable transitive themselves. Tracked under SDLC
+      story c845ee14.
+    -->
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.6" Condition="'$(MSBuildProjectName)' == 'DotNetAgents.Documents'" />
+  </ItemGroup>
 </Project>

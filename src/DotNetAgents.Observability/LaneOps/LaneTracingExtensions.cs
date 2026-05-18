@@ -11,7 +11,7 @@ namespace DotNetAgents.Observability.LaneOps;
 ///
 /// The single shared <c>ActivitySource("DotNetAgents.LaneOps")</c> is registered by
 /// <c>OpenTelemetryExtensions.AddDotNetAgentsInstrumentation</c>; downstream services
-/// (CredentialsAgent, infrastructure-control-agent) get span propagation by attaching
+/// (credential resolver, infrastructure-control-agent) get span propagation by attaching
 /// to the same source name + extracting <see cref="LaneTraceTags.WorkOrderId"/> from
 /// inbound A2A headers (follow-up story for header propagation).
 /// </remarks>

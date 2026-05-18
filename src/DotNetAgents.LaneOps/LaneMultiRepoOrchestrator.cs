@@ -5,7 +5,7 @@ namespace DotNetAgents.LaneOps;
 /// </summary>
 /// <remarks>
 /// The orchestrator is intentionally policy-first: it computes and executes a deterministic,
-/// idempotent sequence through an injected command runner. Host-specific shells, SDLC completion,
+/// idempotent sequence through an injected command runner. Host-specific shells, workflow completion,
 /// and git remotes stay outside this class so the contract can be tested without mutating repos.
 /// </remarks>
 public sealed class LaneMultiRepoOrchestrator
@@ -86,7 +86,7 @@ public sealed class LaneMultiRepoOrchestrator
     private static string RenderCloseoutDescription(LaneCloseoutMode mode) =>
         mode switch
         {
-            LaneCloseoutMode.RecordStoryCloseoutAtomic => "Record SDLC completion atomically with merge completion.",
+            LaneCloseoutMode.RecordStoryCloseoutAtomic => "Record workflow completion atomically with merge completion.",
             LaneCloseoutMode.CreateExplicitFollowUpStory => "Create an explicit follow-up story instead of marking delivery Done.",
             _ => "Record completion state.",
         };
@@ -111,7 +111,7 @@ public sealed class LaneMultiRepoOrchestrator
                 actions.Add(new("record-follow-up", "If parent main changed remotely, create a follow-up story and attach the partial merge state instead of hiding the mid-failure.", MutatesState: false));
                 break;
             case MultiRepoLaneStepKind.Closeout:
-                actions.Add(new("record-completion-or-follow-up", "Retry record_story_completion, or create an explicit follow-up story when the completion gate is unsatisfied.", MutatesState: false));
+                actions.Add(new("record-completion-or-follow-up", "Retry record_work_item_completion, or create an explicit follow-up story when the completion gate is unsatisfied.", MutatesState: false));
                 break;
             case MultiRepoLaneStepKind.Cleanup:
                 actions.Add(new("retry-cleanup", "Retry cleanup only after merge and completion evidence are durable.", MutatesState: true));

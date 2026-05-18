@@ -8,7 +8,7 @@ namespace DotNetAgents.ContextIntent;
 /// </summary>
 /// <remarks>
 /// One ContextIntent payload travels with a unit of work across agent / runtime / boundary
-/// transitions: voice-note → WorkflowService story, WorkflowService story → PromptSpecialist prompt
+/// transitions: voice-note → workflow orchestrator story, workflow orchestrator story → PromptSpecialist prompt
 /// selection, JARVIS intent → MCP tool dispatch. The payload captures *intent* (verb + goal +
 /// success criteria), *context layers* (composable slices of what the receiver needs to know),
 /// *constraints* (lane/policy/security bounds), *acceptance* (executable-ish "done" signals),
@@ -16,7 +16,7 @@ namespace DotNetAgents.ContextIntent;
 /// <para>
 /// Schema version is pinned to <see cref="V1SchemaVersion"/>; v2 lives in a different file.
 /// Secret material is NEVER inlined — use <see cref="ContextLayer.CredentialRefs"/> to point
-/// at CredentialsAgent entries that the consumer resolves at use time.
+/// at credential resolver entries that the consumer resolves at use time.
 /// </para>
 /// </remarks>
 public sealed record ContextIntentEnvelope

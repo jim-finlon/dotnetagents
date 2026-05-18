@@ -1,0 +1,104 @@
+@page "/"
+
+<PageTitle>DotNetAgents Workflow Designer</PageTitle>
+
+<header class="page-header">
+    <div>
+        <p class="page-kicker">Workflow</p>
+        <h1>Workflow Command Center</h1>
+        <p>Create, validate, and execute workflow graphs with public DotNetAgents primitives.</p>
+    </div>
+    <div class="page-header__actions">
+        <button class="btn btn-sm btn-primary" @onclick="ShowImportDialog">Import JSON</button>
+    </div>
+</header>
+
+<section class="kpi-grid">
+    @foreach (var kpi in _kpis)
+    {
+        <article class="metric-card">
+            <span>@kpi.Label</span>
+            <strong>@kpi.Value</strong>
+            <small>@kpi.Detail</small>
+        </article>
+    }
+</section>
+
+<section class="dashboard-split">
+    <div class="dashboard-split__main">
+        <article class="panel-card">
+            <h2>Create workflows</h2>
+            <p class="panel-card__subtitle">Start from blank canvas and compose nodes visually</p>
+            <p class="mb-3">Open the designer to build execution graphs with function, condition, parallel, and human-in-loop nodes.</p>
+            <a href="designer" class="btn btn-primary btn-sm">New workflow</a>
+        </article>
+
+        <article class="panel-card">
+            <h2>Browse workflows</h2>
+            <p class="panel-card__subtitle">Inspect and manage existing definitions</p>
+            <p class="mb-3">Review workflow inventory, run validations, and route edits back to the canvas.</p>
+            <a href="workflows" class="btn btn-outline-primary btn-sm">View workflows</a>
+        </article>
+    </div>
+    <aside class="dashboard-split__rail">
+        <article class="panel-card">
+            <h2>Import workflow</h2>
+            <p class="panel-card__subtitle">JSON bootstrap path</p>
+            <p class="mb-3">Paste a workflow definition payload and import it into your design workspace.</p>
+            <button class="btn btn-sm btn-primary" @onclick="ShowImportDialog">Import from JSON</button>
+        </article>
+    </aside>
+</section>
+
+@if (showImport)
+{
+    <div class="modal show" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Workflow</h5>
+                    <button type="button" class="btn-close" @onclick="CloseImportDialog"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" @bind="importJson" rows="10" placeholder="Paste workflow JSON here..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseImportDialog">Cancel</button>
+                    <button type="button" class="btn btn-primary" @onclick="ImportWorkflow">Import</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private sealed record Metric(string Label, string Value, string Detail);
+
+    private bool showImport = false;
+    private string importJson = string.Empty;
+    private readonly IReadOnlyList<Metric> _kpis =
+    [
+        new("Available node types", "4", "function, condition, parallel, human"),
+        new("Runtime mode", "Interactive", "WebAssembly"),
+        new("Import support", "JSON", "manual paste"),
+        new("Theme system", "Local", "public-core CSS")
+    ];
+
+    private void ShowImportDialog()
+    {
+        showImport = true;
+    }
+
+    private void CloseImportDialog()
+    {
+        showImport = false;
+        importJson = string.Empty;
+    }
+
+    private Task ImportWorkflow()
+    {
+        // TODO: Implement import logic
+        CloseImportDialog();
+        return Task.CompletedTask;
+    }
+}

@@ -9,7 +9,7 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 
 /// <summary>
 /// Abstract <see cref="IMcpPkceTokenIssuer"/> that mints RFC 7519 JWTs after the framework's
-/// PKCE step has succeeded. Per-service subclasses (e.g. <c>KnowledgeMemoryMcpPkceTokenIssuer</c>)
+/// PKCE step has succeeded. Per-service subclasses (e.g. <c>knowledge-memory serviceMcpPkceTokenIssuer</c>)
 /// inherit, declare their <see cref="JwtMcpPkceTokenIssuerOptions"/>, and let this base do the
 /// claim composition + signing.
 /// </summary>

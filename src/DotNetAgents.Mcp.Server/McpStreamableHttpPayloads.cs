@@ -9,7 +9,7 @@ internal static class McpStreamableHttpPayloads
 {
     public static object BuildOAuthProbePayload(string serviceName, string path)
     {
-        var guidance = "This compatibility endpoint does not provide interactive OAuth. Configure X-Api-Key from CredentialsAgent or the local MCP client environment, then retry POST /mcp.";
+        var guidance = "This compatibility endpoint does not provide interactive OAuth. Configure X-Api-Key from credential resolver or the local MCP client environment, then retry POST /mcp.";
         var suggestedNextSteps = new[] { "get_instructions", "retry_with_x_api_key" };
         var metadata = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {

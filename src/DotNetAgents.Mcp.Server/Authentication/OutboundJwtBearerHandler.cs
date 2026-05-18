@@ -14,7 +14,7 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 /// <see cref="DelegatingHandler"/> that mints a JWT signed with this client's outbound
 /// signing key and attaches it to the outbound request as <c>Authorization: Bearer ...</c>.
 /// Audience is the target service the HttpClient calls (e.g. <c>credentials_agent</c> when
-/// WorkflowService calls CredentialsAgent's /mcp surface).
+/// workflow orchestrator calls credential resolver's /mcp surface).
 /// </summary>
 /// <remarks>
 /// <para>
@@ -232,7 +232,7 @@ public sealed class OutboundJwtBearerOptions
     /// signed by this key. Intentionally separate from the service's inbound
     /// <see cref="ISigningKeyProvider"/> to avoid DI cycles when the inbound key is
     /// credentials-backed (the inbound chain depends on <c>ICredentialsClient</c>, which now
-    /// depends on this handler — store outbound key material in config, not in CredentialsAgent).
+    /// depends on this handler — store outbound key material in config, not in credential resolver).
     /// </summary>
     public string SigningKeyPem { get; set; } = string.Empty;
 }

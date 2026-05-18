@@ -19,7 +19,7 @@ public sealed record ContextLayer
     [JsonPropertyName("scope")]
     public required ContextLayerScope Scope { get; init; }
 
-    /// <summary>Free-form layer payload. Secret material MUST be a CredentialsAgent reference, not a value.</summary>
+    /// <summary>Free-form layer payload. Secret material MUST be a credential resolver reference, not a value.</summary>
     [JsonPropertyName("content")]
     public required object Content { get; init; }
 
@@ -44,7 +44,7 @@ public enum ContextLayerScope
     [JsonStringEnumMemberName("turn")] Turn,
 }
 
-/// <summary>Reference to a CredentialsAgent entry. Never inline secret material — keep it as a category/name pointer.</summary>
+/// <summary>Reference to a credential resolver entry. Never inline secret material — keep it as a category/name pointer.</summary>
 public sealed record CredentialRef(
     [property: JsonPropertyName("category")] string Category,
     [property: JsonPropertyName("name")] string Name);

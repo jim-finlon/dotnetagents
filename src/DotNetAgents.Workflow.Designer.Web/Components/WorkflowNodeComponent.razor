@@ -1,0 +1,75 @@
+@using DotNetAgents.Workflow.Designer
+@using Microsoft.AspNetCore.Components.Web
+
+<div class="workflow-node @(IsSelected ? "selected" : "") @(ExecutionState ?? "")"
+     style="left: @(Node.X)px; top: @(Node.Y)px;"
+     @onclick="@(() => OnNodeClick(Node))"
+     @onmousedown="@StartDrag"
+     @onmousemove="@OnMouseMove"
+     @onmouseup="@EndDrag">
+    <div class="node-header">
+        <span class="node-icon">@GetNodeIcon()</span>
+        <span class="node-name">@Node.Name</span>
+    </div>
+    <div class="node-body">
+        <small style="text-transform: capitalize; font-weight: 500;">@Node.Type.Replace("-", " ")</small>
+        @if (!string.IsNullOrEmpty(Node.Description))
+        {
+            <div style="margin-top: 4px; font-size: 10px; color: var(--text-secondary);">
+                @Node.Description
+            </div>
+        }
+    </div>
+    <div class="node-ports">
+        <div class="port input-port" data-node-id="@Node.Id" data-port-type="input" title="Input"></div>
+        <div class="port output-port" data-node-id="@Node.Id" data-port-type="output" title="Output"></div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public WorkflowNodeDto Node { get; set; } = null!;
+    [Parameter] public Action<WorkflowNodeDto> OnNodeClick { get; set; } = null!;
+    [Parameter] public Action<WorkflowNodeDto, double, double> OnNodeMove { get; set; } = null!;
+    [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public string? ExecutionState { get; set; }
+
+    private bool isDragging = false;
+    private double startX, startY;
+    private double nodeStartX, nodeStartY;
+
+    private string GetNodeIcon()
+    {
+        return Node.Type switch
+        {
+            "function" => "⚙️",
+            "condition" => "❓",
+            "parallel" => "⚡",
+            "human-in-loop" => "👤",
+            _ => "●"
+        };
+    }
+
+    private void StartDrag(MouseEventArgs e)
+    {
+        isDragging = true;
+        startX = e.ClientX;
+        startY = e.ClientY;
+        nodeStartX = Node.X;
+        nodeStartY = Node.Y;
+    }
+
+    private void OnMouseMove(MouseEventArgs e)
+    {
+        if (isDragging)
+        {
+            var deltaX = e.ClientX - startX;
+            var deltaY = e.ClientY - startY;
+            OnNodeMove(Node, nodeStartX + deltaX, nodeStartY + deltaY);
+        }
+    }
+
+    private void EndDrag(MouseEventArgs e)
+    {
+        isDragging = false;
+    }
+}

@@ -4,8 +4,8 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 
 /// <summary>
 /// Per-service signing-key abstraction used by <see cref="JwtMcpPkceTokenIssuerBase"/> and
-/// <see cref="JwtMcpPkceBearerValidator"/>. Implementations fetch the key from CredentialsAgent
-/// (production) or generate it in-memory (tests, dev, CredentialsAgent bootstrap).
+/// <see cref="JwtMcpPkceBearerValidator"/>. Implementations fetch the key from credential resolver
+/// (production) or generate it in-memory (tests, dev, credential resolver bootstrap).
 /// </summary>
 /// <remarks>
 /// <para>

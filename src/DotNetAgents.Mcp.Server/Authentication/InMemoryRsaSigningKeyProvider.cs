@@ -9,10 +9,10 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 /// </summary>
 /// <remarks>
 /// <strong>Production services MUST NOT register this provider.</strong> The umbrella AC
-/// requires signing keys to come from CredentialsAgent. This implementation exists so that:
+/// requires signing keys to come from credential resolver. This implementation exists so that:
 /// <list type="bullet">
-/// <item>unit/integration tests can exercise issuer + validator code paths without a CredentialsAgent dependency,</item>
-/// <item>CredentialsAgent itself (sub-slice 4) has a bootstrap path while the signing-key vault is being established.</item>
+/// <item>unit/integration tests can exercise issuer + validator code paths without a credential resolver dependency,</item>
+/// <item>credential resolver itself (sub-slice 4) has a bootstrap path while the signing-key vault is being established.</item>
 /// </list>
 /// </remarks>
 public sealed class InMemoryRsaSigningKeyProvider : ISigningKeyProvider, IDisposable

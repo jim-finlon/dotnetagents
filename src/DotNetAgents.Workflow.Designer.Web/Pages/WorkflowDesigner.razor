@@ -1,0 +1,267 @@
+@page "/designer"
+@page "/designer/{WorkflowId}"
+@using DotNetAgents.Workflow.Designer
+@using DotNetAgents.Workflow.Designer.Web.Components
+@using Microsoft.AspNetCore.Components.Web
+@inject IWorkflowDesignerService DesignerService
+@inject NavigationManager Navigation
+
+<PageTitle>Workflow Designer</PageTitle>
+
+<div class="workflow-designer">
+    <header class="page-header">
+        <div>
+            <p class="page-kicker">Designer</p>
+            <h1>@(workflow.Name ?? "New Workflow")</h1>
+            <p>@(string.IsNullOrEmpty(workflow.Description) ? "Drag node types onto the canvas to build a workflow graph." : workflow.Description)</p>
+        </div>
+        <div class="page-header__actions">
+            <button type="button" class="btn btn-primary" @onclick="SaveWorkflow" title="Save workflow">Save</button>
+            <button type="button" class="btn btn-secondary" @onclick="ValidateWorkflow" title="Validate workflow">Validate</button>
+            <button type="button" class="btn btn-success" @onclick="ExecuteWorkflow" title="Execute workflow">Execute</button>
+            <button type="button" class="btn btn-info" @onclick="ExportWorkflow" title="Export as JSON">Export</button>
+            <button type="button" class="btn btn-warning" @onclick="ClearCanvas" title="Clear canvas">Clear</button>
+        </div>
+    </header>
+
+    <div class="designer-container">
+        <aside class="workflow-designer__rail">
+            <article class="panel-card">
+                <h2>Node types</h2>
+                <p class="panel-card__subtitle">Drag onto the canvas</p>
+                <div class="node-type" draggable="true" @ondragstart="@((e) => OnDragStart(e, "function"))">
+                    <span aria-hidden="true">⚙️</span> <span>Function</span>
+                </div>
+                <div class="node-type" draggable="true" @ondragstart="@((e) => OnDragStart(e, "condition"))">
+                    <span aria-hidden="true">❓</span> <span>Condition</span>
+                </div>
+                <div class="node-type" draggable="true" @ondragstart="@((e) => OnDragStart(e, "parallel"))">
+                    <span aria-hidden="true">⚡</span> <span>Parallel</span>
+                </div>
+                <div class="node-type" draggable="true" @ondragstart="@((e) => OnDragStart(e, "human-in-loop"))">
+                    <span aria-hidden="true">👤</span> <span>Human-in-Loop</span>
+                </div>
+                <p class="workflow-designer__hint">
+                    Tip: drag nodes from the palette onto the canvas to start building your workflow.
+                </p>
+            </article>
+        </aside>
+
+        <div class="canvas-container" @ondrop="OnDrop" @ondragover="OnDragOver" @onclick="OnCanvasClick">
+            <svg class="connections-layer" width="100%" height="100%">
+                @foreach (var edge in workflow.Edges)
+                {
+                    <line x1="@GetNodeX(edge.From)" y1="@GetNodeY(edge.From)"
+                          x2="@GetNodeX(edge.To)" y2="@GetNodeY(edge.To)"
+                          class="connection-line"
+                          data-from="@edge.From"
+                          data-to="@edge.To" />
+                }
+            </svg>
+
+            <div class="nodes-layer">
+                @foreach (var node in workflow.Nodes)
+                {
+                    <WorkflowNodeComponent Node="@node"
+                                         OnNodeClick="@((n) => SelectNode(n))"
+                                         OnNodeMove="@((n, x, y) => MoveNode(n, x, y))"
+                                         IsSelected="@(selectedNode?.Id == node.Id)"
+                                         ExecutionState="@(executionStates.GetValueOrDefault(node.Id))" />
+                }
+            </div>
+        </div>
+
+        <aside class="workflow-designer__rail">
+            <article class="panel-card">
+                <h2>Properties</h2>
+                <p class="panel-card__subtitle">Selected node</p>
+                @if (selectedNode != null)
+                {
+                    <NodePropertiesPanel Node="@selectedNode" OnUpdate="@UpdateNode" />
+                }
+                else
+                {
+                    <p class="text-muted">Select a node to edit properties</p>
+                }
+            </article>
+        </aside>
+    </div>
+
+    @if (showExecutionPanel)
+    {
+        <section class="workflow-designer__execution">
+            <article class="panel-card">
+                <h2>Execution status</h2>
+                <p class="panel-card__subtitle">@executionStatus</p>
+                <p><strong>Current node:</strong> @(currentExecutingNode ?? "—")</p>
+                <button type="button" class="btn btn-danger" @onclick="StopExecution">Stop</button>
+            </article>
+        </section>
+    }
+</div>
+
+@code {
+    [Parameter] public string? WorkflowId { get; set; }
+
+    private WorkflowDefinitionDto workflow = new();
+    private WorkflowNodeDto? selectedNode;
+    private string? draggedNodeType;
+    private bool showExecutionPanel = false;
+    private string executionStatus = "Idle";
+    private string? currentExecutingNode;
+    private Dictionary<string, string> executionStates = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(WorkflowId))
+        {
+            var existing = await DesignerService.GetWorkflowAsync(WorkflowId);
+            if (existing != null)
+            {
+                workflow = existing;
+            }
+        }
+        else
+        {
+            workflow = new WorkflowDefinitionDto
+            {
+                Name = "New Workflow",
+                Version = "1.0.0",
+                Nodes = new List<WorkflowNodeDto>(),
+                Edges = new List<WorkflowEdgeDto>()
+            };
+        }
+    }
+
+    private void OnDragStart(DragEventArgs e, string nodeType)
+    {
+        draggedNodeType = nodeType;
+        e.DataTransfer.EffectAllowed = "copy";
+    }
+
+    private void OnDragOver(DragEventArgs e)
+    {
+        // Allow drop
+    }
+
+    private void OnDrop(DragEventArgs e)
+    {
+        if (string.IsNullOrEmpty(draggedNodeType))
+            return;
+
+        var x = 100 + (workflow.Nodes.Count * 50);
+        var y = 100 + (workflow.Nodes.Count * 50);
+
+        var newNode = new WorkflowNodeDto
+        {
+            Id = Guid.NewGuid().ToString(),
+            Name = $"{draggedNodeType}-{workflow.Nodes.Count + 1}",
+            Type = draggedNodeType,
+            X = x,
+            Y = y,
+            Config = new Dictionary<string, object>()
+        };
+
+        workflow.Nodes.Add(newNode);
+        draggedNodeType = null;
+        StateHasChanged();
+    }
+
+    private void OnCanvasClick(MouseEventArgs e)
+    {
+        selectedNode = null;
+        StateHasChanged();
+    }
+
+    private void SelectNode(WorkflowNodeDto node)
+    {
+        selectedNode = node;
+        StateHasChanged();
+    }
+
+    private void MoveNode(WorkflowNodeDto node, double x, double y)
+    {
+        node.X = (int)x;
+        node.Y = (int)y;
+        StateHasChanged();
+    }
+
+    private void UpdateNode(WorkflowNodeDto node)
+    {
+        var index = workflow.Nodes.FindIndex(n => n.Id == node.Id);
+        if (index >= 0)
+        {
+            workflow.Nodes[index] = node;
+            StateHasChanged();
+        }
+    }
+
+    private double GetNodeX(string nodeId)
+    {
+        var node = workflow.Nodes.FirstOrDefault(n => n.Id == nodeId);
+        return node?.X + 50 ?? 0;
+    }
+
+    private double GetNodeY(string nodeId)
+    {
+        var node = workflow.Nodes.FirstOrDefault(n => n.Id == nodeId);
+        return node?.Y + 50 ?? 0;
+    }
+
+    private async Task SaveWorkflow()
+    {
+        try
+        {
+            workflow = await DesignerService.SaveWorkflowAsync(workflow);
+        }
+        catch (Exception)
+        {
+            // Show error message
+        }
+    }
+
+    private async Task ValidateWorkflow()
+    {
+        try
+        {
+            await DesignerService.ValidateWorkflowAsync(workflow);
+        }
+        catch (Exception)
+        {
+            // Show error message
+        }
+    }
+
+    private async Task ExecuteWorkflow()
+    {
+        showExecutionPanel = true;
+        executionStatus = "Running";
+
+        try
+        {
+            await DesignerService.ExecuteWorkflowAsync(workflow.Name, new Dictionary<string, object>());
+        }
+        catch (Exception)
+        {
+            executionStatus = "Error";
+        }
+    }
+
+    private void StopExecution()
+    {
+        executionStatus = "Stopped";
+    }
+
+    private void ExportWorkflow()
+    {
+        _ = System.Text.Json.JsonSerializer.Serialize(workflow, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+    }
+
+    private void ClearCanvas()
+    {
+        workflow.Nodes.Clear();
+        workflow.Edges.Clear();
+        selectedNode = null;
+        StateHasChanged();
+    }
+}

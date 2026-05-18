@@ -1,6 +1,6 @@
 # DotNetAgents.Mcp
 
-MCP (Model Context Protocol) client library for DotNetAgents, enabling integration with MCP-enabled services for JARVIS-like AI assistants.
+MCP (Model Context Protocol) client library for DotNetAgents, enabling integration with MCP-enabled agent hosts and tool surfaces.
 
 ## Features
 

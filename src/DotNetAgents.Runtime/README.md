@@ -18,7 +18,7 @@ Primary extension seams:
 
 `InProcessDelegationBroker` starts a child `AgentRunMode.Delegated` session through `IAgentRuntime`, records parent-child lineage, and returns only a concise summary plus artifact and trajectory refs. It is for bounded research, summarization, verification, and parallel tool work inside an already-owned runtime session.
 
-It is not SDLC story ownership, automated worker execution, deployment approval, or a substitute for workflow control plane completion. Default policy rejects recursive delegation, credential/secret tools, memory-write tools, destructive filesystem/shell tools, schedule/cron creation, and production deploy actions unless a later explicit policy story grants a bounded exception.
+It is not SDLC story ownership, automated worker execution, deployment approval, or a substitute for operator console completion. Default policy rejects recursive delegation, credential/secret tools, memory-write tools, destructive filesystem/shell tools, schedule/cron creation, and production deploy actions unless a later explicit policy story grants a bounded exception.
 
 ## Execution Environment Leases
 

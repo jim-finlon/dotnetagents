@@ -6,7 +6,7 @@ namespace DotNetAgents.Mcp.Server;
 /// <summary>
 /// Ensures <c>POST /mcp/tools/call</c> (and streamable <c>tools/call</c>) reject empty or incomplete
 /// <c>arguments</c> when the tool's published <see cref="McpToolInputSchema.Required"/> list is non-empty,
-/// matching planning_tools / Evaluation Sandbox MCP contract parity (MISSING_ARG + guidance).
+/// matching orchestrator MCP surface / evaluation sandbox MCP contract parity (MISSING_ARG + guidance).
 /// </summary>
 internal static class McpRequiredArgumentGuard
 {

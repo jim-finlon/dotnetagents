@@ -2,14 +2,14 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 
 /// <summary>
 /// Per-service issuer configuration consumed by <see cref="JwtMcpPkceTokenIssuerBase"/>.
-/// One options instance is bound per service (KnowledgeMemory, AiSessionPersistence, WorkflowService,
-/// CredentialsAgent) so each mints tokens with its own audience and scope allowlist.
+/// One options instance is bound per service (knowledge-memory service, AiSessionPersistence, workflow orchestrator,
+/// credential resolver) so each mints tokens with its own audience and scope allowlist.
 /// </summary>
 /// <remarks>
 /// Per the umbrella story d971cd01 acceptance criteria: token TTL must be ≤ 24h, default 1h;
 /// scope allowlist is enforced server-side and is never trusted from the client. The audience
 /// claim is the cross-service rejection lever: a token with <c>aud=hive_mind</c> is rejected
-/// by WorkflowService's validator because WorkflowService's audience is <c>workflow_service</c>.
+/// by workflow orchestrator's validator because workflow orchestrator's audience is <c>workflow_service</c>.
 /// </remarks>
 public sealed class JwtMcpPkceTokenIssuerOptions
 {

@@ -26,7 +26,7 @@ public static class McpMutatingOperationPolicyErrorCodes
 /// </summary>
 public sealed record McpMutatingOperationContext
 {
-    /// <summary>Durable actor id, such as agent-alpha.</summary>
+    /// <summary>Durable actor id, such as workstation-agent.</summary>
     public string? ActorId { get; init; }
 
     /// <summary>Actor type, such as WorkstationSession or AgentInstance.</summary>

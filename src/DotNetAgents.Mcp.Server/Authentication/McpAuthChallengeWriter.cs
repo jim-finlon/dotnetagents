@@ -13,7 +13,7 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 ///   render "API key missing" instead of falling back to a generic OAuth-probe failure.</item>
 /// </list>
 /// Each Core 4 service still keeps its own bespoke api-key middleware (because the gate policies
-/// differ — risk-aware path matching for WorkflowService, env-var fallback for KnowledgeMemory, dev-mode bypass
+/// differ — risk-aware path matching for workflow orchestrator, env-var fallback for knowledge-memory service, dev-mode bypass
 /// for AiSessionPersistence), but they share these helpers so the conformance behavior matches
 /// across the portfolio.
 /// </summary>
@@ -116,7 +116,7 @@ public static class McpAuthChallengeWriter
     {
         var error = message ?? $"Missing or invalid {safeHeader}.";
         var guidance =
-            $"Provide {safeHeader} for service '{safeRealm}' from CredentialsAgent or the configured runtime environment, then retry. Do not paste or log raw key values.";
+            $"Provide {safeHeader} for service '{safeRealm}' from credential resolver or the configured runtime environment, then retry. Do not paste or log raw key values.";
         var suggestedNextSteps = new[]
         {
             "get_instructions",

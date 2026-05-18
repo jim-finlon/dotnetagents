@@ -1,0 +1,241 @@
+{
+  "buildDeferredPublicCorePackages": [],
+  "category": "public-core",
+  "notes": [
+    "Private staging snapshot only.",
+    "Public-plugin, premium-plugin, private-factory, hosted-paas, and internal-only packages are intentionally excluded.",
+    "Removed ProjectReference edges must be replaced by package references, public abstractions, or package splits before final public release if source compilation requires them."
+  ],
+  "packageCount": 73,
+  "packages": [
+    "DotNetAgents",
+    "DotNetAgents.A2A",
+    "DotNetAgents.A2A.Client",
+    "DotNetAgents.A2A.Server",
+    "DotNetAgents.Abstractions",
+    "DotNetAgents.AgentFramework",
+    "DotNetAgents.AgenticRAG",
+    "DotNetAgents.Agents.BehaviorTrees",
+    "DotNetAgents.Agents.ControlLoops",
+    "DotNetAgents.Agents.Hierarchical",
+    "DotNetAgents.Agents.IntentProjector",
+    "DotNetAgents.Agents.LaneProfile",
+    "DotNetAgents.Agents.Marketplace",
+    "DotNetAgents.Agents.Messaging",
+    "DotNetAgents.Agents.Registry",
+    "DotNetAgents.Agents.StateMachines",
+    "DotNetAgents.Agents.Supervisor",
+    "DotNetAgents.Agents.Supervisor.BehaviorTrees",
+    "DotNetAgents.Agents.Swarm",
+    "DotNetAgents.Agents.Tasks",
+    "DotNetAgents.Agents.WorkerPool",
+    "DotNetAgents.Analyzers",
+    "DotNetAgents.CLI",
+    "DotNetAgents.Channels",
+    "DotNetAgents.Compliance.Predicates",
+    "DotNetAgents.Configuration",
+    "DotNetAgents.ContextIntent",
+    "DotNetAgents.Contracts",
+    "DotNetAgents.Core",
+    "DotNetAgents.Credentials.Client",
+    "DotNetAgents.Documents",
+    "DotNetAgents.Ecosystem",
+    "DotNetAgents.Edge",
+    "DotNetAgents.Gateway",
+    "DotNetAgents.Governance",
+    "DotNetAgents.Knowledge",
+    "DotNetAgents.LaneOps",
+    "DotNetAgents.Mcp",
+    "DotNetAgents.Mcp.Auth",
+    "DotNetAgents.Mcp.Conformance",
+    "DotNetAgents.Mcp.Server",
+    "DotNetAgents.Mcp.Stdio",
+    "DotNetAgents.Memory.Advanced",
+    "DotNetAgents.Memory.Profile",
+    "DotNetAgents.ModelRouting",
+    "DotNetAgents.MultiModal",
+    "DotNetAgents.Observability",
+    "DotNetAgents.Observability.AspNetCore",
+    "DotNetAgents.Observability.GenAi",
+    "DotNetAgents.PreviewConfirm",
+    "DotNetAgents.Proactive",
+    "DotNetAgents.PromptRuntime",
+    "DotNetAgents.REPL",
+    "DotNetAgents.ReleasePolicy",
+    "DotNetAgents.Runtime",
+    "DotNetAgents.Security",
+    "DotNetAgents.SessionPersistence",
+    "DotNetAgents.Skills",
+    "DotNetAgents.Skills.Projection",
+    "DotNetAgents.StructuredOutput",
+    "DotNetAgents.Subagents",
+    "DotNetAgents.Tasks",
+    "DotNetAgents.Tools.BuiltIn",
+    "DotNetAgents.Tools.Development",
+    "DotNetAgents.Tools.Unified",
+    "DotNetAgents.Voice",
+    "DotNetAgents.Voice.Dialog",
+    "DotNetAgents.Voice.Scheduling",
+    "DotNetAgents.Voice.SignalR",
+    "DotNetAgents.Voice.Transcription",
+    "DotNetAgents.Workflow",
+    "DotNetAgents.Workflow.Designer",
+    "DotNetAgents.Workflow.Designer.Web"
+  ],
+  "removedProjectReferences": [
+    {
+      "include": "../DotNetAgents.Storage.TaskKnowledge.PostgreSQL/DotNetAgents.Storage.PostgreSQL.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Storage.PostgreSQL"
+    },
+    {
+      "include": "../DotNetAgents.Storage.TaskKnowledge.SqlServer/DotNetAgents.Storage.SqlServer.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Storage.SqlServer"
+    },
+    {
+      "include": "../DotNetAgents.Storage.Agents.PostgreSQL/DotNetAgents.Storage.Agents.PostgreSQL.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Storage.Agents.PostgreSQL"
+    },
+    {
+      "include": "../DotNetAgents.VectorStores.Pinecone/DotNetAgents.VectorStores.Pinecone.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.VectorStores.Pinecone"
+    },
+    {
+      "include": "../DotNetAgents.VectorStores.PostgreSQL/DotNetAgents.VectorStores.PostgreSQL.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.VectorStores.PostgreSQL"
+    },
+    {
+      "include": "../DotNetAgents.VectorStores.Weaviate/DotNetAgents.VectorStores.Weaviate.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.VectorStores.Weaviate"
+    },
+    {
+      "include": "../DotNetAgents.VectorStores.Qdrant/DotNetAgents.VectorStores.Qdrant.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.VectorStores.Qdrant"
+    },
+    {
+      "include": "../DotNetAgents.VectorStores.Chroma/DotNetAgents.VectorStores.Chroma.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.VectorStores.Chroma"
+    },
+    {
+      "include": "../DotNetAgents.Agents.Messaging.RabbitMQ/DotNetAgents.Agents.Messaging.RabbitMQ.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Agents.Messaging.RabbitMQ"
+    },
+    {
+      "include": "../DotNetAgents.Agents.Messaging.Kafka/DotNetAgents.Agents.Messaging.Kafka.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Agents.Messaging.Kafka"
+    },
+    {
+      "include": "../DotNetAgents.Agents.Messaging.Redis/DotNetAgents.Agents.Messaging.Redis.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Agents.Messaging.Redis"
+    },
+    {
+      "include": "../DotNetAgents.Agents.Messaging.SignalR/DotNetAgents.Agents.Messaging.SignalR.csproj",
+      "reason": "public-plugin",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Agents.Messaging.SignalR"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.OpenAI/DotNetAgents.Providers.OpenAI.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.OpenAI"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Azure/DotNetAgents.Providers.Azure.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Azure"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.AWS/DotNetAgents.Providers.AWS.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.AWS"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Google/DotNetAgents.Providers.Google.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Google"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Anthropic/DotNetAgents.Providers.Anthropic.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Anthropic"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Cohere/DotNetAgents.Providers.Cohere.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Cohere"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Mistral/DotNetAgents.Providers.Mistral.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Mistral"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Together/DotNetAgents.Providers.Together.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Together"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Groq/DotNetAgents.Providers.Groq.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Groq"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.Ollama/DotNetAgents.Providers.Ollama.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.Ollama"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.LMStudio/DotNetAgents.Providers.LMStudio.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.LMStudio"
+    },
+    {
+      "include": "../Providers/DotNetAgents.Providers.vLLM/DotNetAgents.Providers.vLLM.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents",
+      "target": "DotNetAgents.Providers.vLLM"
+    },
+    {
+      "include": "../../../tools/Dna.Observability.Publisher/Dna.Observability.Publisher.csproj",
+      "reason": "unclassified-or-outside-public-root",
+      "source": "DotNetAgents.Mcp.Server",
+      "target": "Dna.Observability.Publisher"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceInventory": "docs/architecture/OPEN-CORE-INVENTORY.md",
+  "sourceRoot": "DotNetAgents/src",
+  "stagingRoot": "staging/public-dotnetagents"
+}

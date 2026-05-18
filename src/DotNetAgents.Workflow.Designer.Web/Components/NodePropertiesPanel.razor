@@ -1,0 +1,106 @@
+@using DotNetAgents.Workflow.Designer
+@using Microsoft.AspNetCore.Components
+
+<div class="properties-panel-content">
+    <div class="form-group">
+        <label>📝 Name</label>
+        <input type="text" class="form-control" @bind="Node.Name" @bind:event="oninput" placeholder="Enter node name" />
+    </div>
+
+    <div class="form-group">
+        <label>🏷️ Type</label>
+        <select class="form-control" @bind="Node.Type">
+            <option value="function">⚙️ Function</option>
+            <option value="condition">❓ Condition</option>
+            <option value="parallel">⚡ Parallel</option>
+            <option value="human-in-loop">👤 Human-in-Loop</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>📄 Description</label>
+        <textarea class="form-control" @bind="Node.Description" rows="3" placeholder="Optional description"></textarea>
+    </div>
+
+    @if (Node.Type == "condition")
+    {
+        <div class="form-group">
+            <label>🔀 Condition Expression</label>
+            <input type="text" class="form-control"
+                   value="@GetConditionValue()"
+                   @onchange="@((ChangeEventArgs e) => SetConditionValue(e.Value?.ToString() ?? ""))"
+                   placeholder="e.g., state.value > 10" />
+            <small style="color: var(--text-secondary); font-size: 11px; margin-top: 4px; display: block;">
+                Expression that evaluates to true/false
+            </small>
+        </div>
+    }
+
+    @if (Node.Type == "function")
+    {
+        <div class="form-group">
+            <label>🔧 Handler Method</label>
+            <input type="text" class="form-control"
+                   value="@GetHandlerValue()"
+                   @onchange="@((ChangeEventArgs e) => SetHandlerValue(e.Value?.ToString() ?? ""))"
+                   placeholder="Namespace.Class.MethodAsync" />
+            <small style="color: var(--text-secondary); font-size: 11px; margin-top: 4px; display: block;">
+                Fully qualified method name
+            </small>
+        </div>
+    }
+
+    <div class="form-group">
+        <label>📍 Position</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+                <label style="font-size: 11px; margin-bottom: 4px;">X Coordinate</label>
+                <input type="number" class="form-control" @bind="Node.X" />
+            </div>
+            <div>
+                <label style="font-size: 11px; margin-bottom: 4px;">Y Coordinate</label>
+                <input type="number" class="form-control" @bind="Node.Y" />
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);">
+        <button class="btn btn-primary" style="width: 100%;" @onclick="Update">
+            <span>💾</span> Update Node
+        </button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public WorkflowNodeDto Node { get; set; } = null!;
+    [Parameter] public Action<WorkflowNodeDto> OnUpdate { get; set; } = null!;
+
+    private string GetConditionValue()
+    {
+        if (Node.Config.TryGetValue("condition", out var condition))
+            return condition.ToString() ?? "";
+        return "";
+    }
+
+    private void SetConditionValue(string value)
+    {
+        Node.Config["condition"] = value;
+    }
+
+    private string GetHandlerValue()
+    {
+        if (Node.Config.TryGetValue("handler", out var handler))
+            return handler.ToString() ?? "";
+        return "";
+    }
+
+    private void SetHandlerValue(string value)
+    {
+        Node.Config["handler"] = value;
+    }
+
+    private void Update()
+    {
+        OnUpdate(Node);
+    }
+}

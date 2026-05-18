@@ -27,6 +27,7 @@ DotNetAgents.Configuration
 DotNetAgents.ContextIntent
 DotNetAgents.Contracts
 DotNetAgents.Core
+DotNetAgents.Credentials.Client
 DotNetAgents.Documents
 DotNetAgents.Ecosystem
 DotNetAgents.Edge
@@ -59,6 +60,7 @@ DotNetAgents.Skills.Projection
 DotNetAgents.StructuredOutput
 DotNetAgents.Subagents
 DotNetAgents.Tasks
+DotNetAgents.Tools.BuiltIn
 DotNetAgents.Tools.Development
 DotNetAgents.Tools.Unified
 DotNetAgents.Voice
@@ -68,3 +70,4 @@ DotNetAgents.Voice.SignalR
 DotNetAgents.Voice.Transcription
 DotNetAgents.Workflow
 DotNetAgents.Workflow.Designer
+DotNetAgents.Workflow.Designer.Web

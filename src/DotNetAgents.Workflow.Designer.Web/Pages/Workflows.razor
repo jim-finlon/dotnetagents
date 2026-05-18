@@ -1,0 +1,117 @@
+@page "/workflows"
+@using DotNetAgents.Workflow.Designer
+@using Microsoft.AspNetCore.Components.Web
+@inject IWorkflowDesignerService DesignerService
+@inject NavigationManager Navigation
+
+<PageTitle>Workflows</PageTitle>
+
+<header class="page-header">
+    <div>
+        <p class="page-kicker">Workflow</p>
+        <h1>Workflow Inventory</h1>
+        <p>Manage and organize workflow definitions.</p>
+    </div>
+    <div class="page-header__actions">
+        <button class="btn btn-sm btn-outline-secondary" @onclick="RefreshWorkflows" title="Refresh list">Refresh</button>
+        <button class="btn btn-sm btn-primary" @onclick="CreateNewWorkflow">New workflow</button>
+    </div>
+</header>
+
+<article class="panel-card">
+    <h2>Registered workflows</h2>
+    <p class="panel-card__subtitle">Current definitions in workflow service</p>
+    @if (loading)
+    {
+        <p>Loading workflows...</p>
+    }
+    else if (workflows.Count == 0)
+    {
+        <div class="empty-state">
+            <div style="font-size: 64px; margin-bottom: 24px;">📊</div>
+            <h3 style="margin: 0 0 12px 0; color: var(--text-primary);">No Workflows Yet</h3>
+            <p style="margin: 0 0 24px 0; color: var(--text-secondary);">
+                Create your first workflow to get started building agent systems.
+            </p>
+            <button class="btn btn-primary" @onclick="CreateNewWorkflow">
+                <span>✨</span> Create Your First Workflow
+            </button>
+        </div>
+    }
+    else
+    {
+        <table class="workflows-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Version</th>
+                    <th>Nodes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var workflow in workflows)
+                {
+                    <tr>
+                        <td>@workflow.Name</td>
+                        <td>@(workflow.Description ?? "-")</td>
+                        <td>@workflow.Version</td>
+                        <td>@(workflow.Nodes?.Count ?? 0)</td>
+                        <td>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-sm btn-primary" @onclick="@(() => EditWorkflow(workflow))" title="Edit workflow">Edit</button>
+                                <button class="btn btn-sm btn-danger" @onclick="@(() => DeleteWorkflow(workflow))" title="Delete workflow">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</article>
+
+@code {
+    private List<WorkflowDefinitionDto> workflows = new();
+    private bool loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshWorkflows();
+    }
+
+    private async Task RefreshWorkflows()
+    {
+        loading = true;
+        try
+        {
+            workflows = (await DesignerService.ListWorkflowsAsync()).ToList();
+        }
+        catch (Exception ex)
+        {
+            // Handle error
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    private void CreateNewWorkflow()
+    {
+        Navigation.NavigateTo("/designer");
+    }
+
+    private void EditWorkflow(WorkflowDefinitionDto workflow)
+    {
+        // Extract ID from workflow - may need to use a different property
+        var workflowId = workflow.Name; // Temporary - should use actual ID
+        Navigation.NavigateTo($"/designer/{workflowId}");
+    }
+
+    private async Task DeleteWorkflow(WorkflowDefinitionDto workflow)
+    {
+        // TODO: Implement delete with confirmation
+        await RefreshWorkflows();
+    }
+}

@@ -17,12 +17,12 @@ namespace DotNetAgents.Gateway;
 /// <param name="OutcomeId">UUID stamped at receipt creation.</param>
 /// <param name="ModelInvocationId">Stable id of the LLM invocation that produced the action being scored. Joined against the model-use telemetry pipeline.</param>
 /// <param name="Kind">Kind of downstream signal carried in this receipt.</param>
-/// <param name="LinkedArtifactType">Artifact category the receipt scores: story-completion, code-diff, review-verdict, test-run, deployment-run, user-acceptance, generated-document, ui-screenshot-eval, tool-execution.</param>
+/// <param name="LinkedArtifactType">Artifact category the receipt scores: work-item-completion, code-diff, review-verdict, test-run, deployment-run, user-acceptance, generated-document, ui-screenshot-eval, tool-execution.</param>
 /// <param name="LinkedArtifactId">Identifier of the linked artifact (free-form — story id, PR ref, test run guid, etc.).</param>
-/// <param name="AgentId">Stable agent id that made the LLM call (e.g. "agent-alpha", "agent-alpha", "autonomous-loop").</param>
+/// <param name="AgentId">Stable agent id that made the LLM call (e.g. "agent-gamma", "agent-alpha", "autonomous-loop").</param>
 /// <param name="DomainTag">Task domain bucket (e.g. "implementation", "review", "deploy"). Drives aggregated-quality lookups by domain.</param>
 /// <param name="ModelId">Model id from the gateway catalog (e.g. "qwen3-32b", "gpt-4o").</param>
-/// <param name="GatewayId">Gateway hosting <see cref="ModelId"/> (e.g. "agent-host", "openai").</param>
+/// <param name="GatewayId">Gateway hosting <see cref="ModelId"/> (e.g. "local-gateway", "openai").</param>
 /// <param name="WasLocalRoute">True when the routing decision picked a local model; false when it escalated external. Surfaced separately from <see cref="EscalationReason"/> so dashboards can aggregate on local-vs-external without parsing the reason string.</param>
 /// <param name="EscalationReason">When <see cref="WasLocalRoute"/> is false, the structured reason the router escalated (e.g. "HighCognitionRequired", "LocalQualityBelowThreshold", "OperatorPolicy"). Null on local routes.</param>
 /// <param name="Scores">Per-dimension scores for this outcome.</param>

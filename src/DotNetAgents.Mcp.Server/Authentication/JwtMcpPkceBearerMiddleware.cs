@@ -89,7 +89,7 @@ public sealed class JwtMcpPkceBearerMiddleware
         }
 
         // /mcp/instructions is the public bootstrap surface — same posture as the existing
-        // X-Api-Key gate in KnowledgeMemory/WorkflowService: do not require auth on it.
+        // X-Api-Key gate in knowledge-memory service/workflow orchestrator: do not require auth on it.
         return !remaining.Equals("/instructions", StringComparison.OrdinalIgnoreCase);
     }
 

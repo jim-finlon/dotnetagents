@@ -9,7 +9,7 @@ namespace DotNetAgents.Mcp.Adapters;
 /// 574756a4) can invoke MCP tools through the standard <see cref="ITool"/> contract.
 /// Per RW-5 (story e05c7b1e). The factory is a generic primitive — it has no knowledge of
 /// per-role allowlists or forbidden-tool deny-lists; those policies live in the consuming layer
-/// (e.g. WorkflowService's <c>IRoleScopedMcpToolProvider</c>).
+/// (e.g. the host's role-scoped MCP tool provider).
 /// </summary>
 public interface IMcpAgentToolFactory
 {

@@ -23,7 +23,7 @@ public sealed class McpInstructionsResponse
     [JsonPropertyName("baseUrlNote")]
     public string? BaseUrlNote { get; set; }
 
-    /// <summary>Who may use this service (LLMs, JARVIS, etc.).</summary>
+    /// <summary>Who may use this service (LLMs, voice hosts, IDE agents, etc.).</summary>
     [JsonPropertyName("consumers")]
     public string? Consumers { get; set; }
 
@@ -31,7 +31,7 @@ public sealed class McpInstructionsResponse
     [JsonPropertyName("directoryLink")]
     public string? DirectoryLink { get; set; }
 
-    /// <summary>Optional per-client config hints (Cursor, Claude, JARVIS).</summary>
+    /// <summary>Optional per-client config hints (Cursor, Claude, Codex, etc.).</summary>
     [JsonPropertyName("configSnippets")]
     public IReadOnlyDictionary<string, string>? ConfigSnippets { get; set; }
 

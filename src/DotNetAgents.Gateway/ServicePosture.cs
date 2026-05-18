@@ -5,7 +5,7 @@ namespace DotNetAgents.Gateway;
 // Story 06d1ff68 (foundation slice of 0bb76944). Shared posture contract that
 // downstream agents publish and JARVIS routing reads. Pure-additive — the
 // contract lives in DotNetAgents.Gateway because it's a cross-service
-// substrate (every routing-aware caller will need this); the WorkflowService
+// substrate (every routing-aware caller will need this); the workflow orchestrator
 // posture provider (sibling c28c8183) and JARVIS routing-policy decorator
 // (sibling e7576c9c) compile against the records here.
 //

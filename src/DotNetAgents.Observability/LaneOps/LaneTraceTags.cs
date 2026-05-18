@@ -12,7 +12,7 @@ namespace DotNetAgents.Observability.LaneOps;
 ///
 /// <see cref="WorkOrderId"/> is the trace correlation key — every span emitted on behalf
 /// of a single automated worker carries the same WorkOrderId so downstream services
-/// (CredentialsAgent, infrastructure-control-agent) can attach to the parent trace via
+/// (credential resolver, infrastructure-control-agent) can attach to the parent trace via
 /// A2A header propagation (follow-up story).
 /// </remarks>
 public static class LaneTraceTags
@@ -56,6 +56,6 @@ public static class LaneTraceTags
     /// <summary>Initiator actor type (WorkstationSession, AgentInstance, Human, ...).</summary>
     public const string InitiatorActorType = "lane.initiator.actor_type";
 
-    /// <summary>Initiator actor id (e.g. agent-alpha, agent-alpha).</summary>
+    /// <summary>Initiator actor id (e.g. agent-gamma, agent-alpha).</summary>
     public const string InitiatorActorId = "lane.initiator.actor_id";
 }

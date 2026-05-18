@@ -162,7 +162,7 @@ public sealed class JwtMcpPkceBearerValidator
 
     /// <summary>
     /// Combine the local signing keys with any configured peer keys + collect the union of
-    /// trusted issuers. Story (WorkflowService → CredentialsAgent Bearer chain): peer entries enable
+    /// trusted issuers. Story (workflow orchestrator → credential resolver Bearer chain): peer entries enable
     /// service-to-service auth without sharing private key material. Audience binding still
     /// rejects cross-target replays.
     /// </summary>

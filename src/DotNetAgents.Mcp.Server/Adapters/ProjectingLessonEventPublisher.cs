@@ -7,7 +7,7 @@ namespace DotNetAgents.Mcp.Server.Adapters;
 /// <summary>
 /// Bridges <see cref="ILessonEventPublisher.PublishLearningEventAsync"/> events emitted by the
 /// MCP server (on every tool call) to <see cref="IAgentLearningProjector"/>, which forwards to
-/// configured HTTP targets (KnowledgeMemory, EvaluationSandbox endpoints, etc.). This is the systemic link
+/// configured HTTP targets (knowledge-memory service, evaluation sandbox endpoints, etc.). This is the systemic link
 /// that makes dna.learning.event.v1 auto-emission actually reach downstream sinks without
 /// per-service wiring.
 ///

@@ -28,7 +28,7 @@ public sealed class JwtMcpPkceBearerValidationOptions
     public TimeSpan ValidationCacheLifetime { get; set; } = TimeSpan.FromMinutes(5);
 
     /// <summary>
-    /// Story (WorkflowService → CredentialsAgent Bearer chain): trusted peer-service signing keys.
+    /// Story (workflow orchestrator → credential resolver Bearer chain): trusted peer-service signing keys.
     /// When a peer DNA service calls this service over /mcp, the peer presents a JWT signed by
     /// its own per-service signing key with <c>iss=&lt;peer issuer&gt;</c> and
     /// <c>aud=&lt;this service's audience&gt;</c>. Audience binding (the cross-service rejection

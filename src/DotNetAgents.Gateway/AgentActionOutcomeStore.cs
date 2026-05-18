@@ -4,9 +4,9 @@ namespace DotNetAgents.Gateway;
 
 /// <summary>
 /// Append-only outcome receipt store. Story 8bd0eb13 — backs both the recorder seam (where
-/// SDLC completion / review / test flows attach receipts) and the aggregator (where
+/// workflow completion / review / test flows attach receipts) and the aggregator (where
 /// PromptSpecialist + Model Gateway query outcomes by agent / domain / model / route). The
-/// in-memory default is single-process; future stories may swap a Postgres or KnowledgeMemory-backed
+/// in-memory default is single-process; future stories may swap a Postgres or knowledge-memory service-backed
 /// implementation without touching call sites.
 /// </summary>
 public interface IAgentActionOutcomeStore
