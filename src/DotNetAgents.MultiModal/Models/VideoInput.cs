@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.MultiModal.Models;
 
 /// <summary>Input for video analysis.</summary>

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;

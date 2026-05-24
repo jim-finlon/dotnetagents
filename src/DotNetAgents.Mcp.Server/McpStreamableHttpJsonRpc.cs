@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Nodes;

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -21,7 +23,7 @@ public record McpToolCallRequest
     /// Arguments to pass to the tool.
     /// </summary>
     /// <remarks>
-    /// Voice routing may add <c>jarvisUserMemory</c> (see <see cref="DotNetAgents.Mcp.Routing.IntentParameterKeys.JarvisUserMemory"/>)
+    /// Voice routing may add <c>userMemoryContext</c> (see <see cref="DotNetAgents.Mcp.Routing.IntentParameterKeys.UserMemoryContext"/>)
     /// when long-term user memory is available; downstream tools should ignore unknown keys they do not use.
     /// </remarks>
     public Dictionary<string, object> Arguments { get; init; } = new();

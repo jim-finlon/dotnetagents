@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents Analyzers
 
 This package provides Roslyn analyzers and source generators for DotNetAgents to enhance developer experience with compile-time validation and IntelliSense improvements.

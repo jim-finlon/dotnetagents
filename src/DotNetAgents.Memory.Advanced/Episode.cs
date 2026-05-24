@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Memory.Advanced;
 
 /// <summary>Single episode for episodic memory. FR-MEM-001.</summary>

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Workflow.HumanInLoop;
 
 /// <summary>
@@ -80,13 +82,13 @@ public class WorkflowStateInspector<TState> where TState : class
     /// <summary>
     /// Represents a snapshot of workflow state.
     /// </summary>
-    /// <typeparam name="TState">The type of the workflow state.</typeparam>
-    public class StateSnapshot<TState> where TState : class
+    /// <typeparam name="TSnapshotState">The type of the workflow state.</typeparam>
+    public class StateSnapshot<TSnapshotState> where TSnapshotState : class
     {
         /// <summary>
         /// Gets the workflow state.
         /// </summary>
-        public TState State { get; init; } = null!;
+        public TSnapshotState State { get; init; } = null!;
 
         /// <summary>
         /// Gets the timestamp when the snapshot was captured.

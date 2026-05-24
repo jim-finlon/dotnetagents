@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.MultiModal.ContentParts;
 
 /// <summary>Content part holding audio data (stream/path) or bytes.</summary>

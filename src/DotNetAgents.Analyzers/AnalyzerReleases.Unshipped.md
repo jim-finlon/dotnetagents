@@ -1,8 +1,8 @@
 ; Unshipped analyzer release.
+; SPDX-License-Identifier: Apache-2.0
 ; https://github.com/dotnet/roslyn-analyzers/blob/main/src/Microsoft.CodeAnalysis.Analyzers/ReleaseTrackingAnalyzers.Help.md
 
 ### New Rules
-
 Rule ID  | Category                    | Severity | Notes
 ---------|-----------------------------|----------|--------------------------------------------------------------------------------
 DNA00101 | DotNetAgents.Workflow       | Error    | Workflow graph must have an entry point.

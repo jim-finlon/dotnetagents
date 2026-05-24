@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
@@ -146,8 +148,8 @@ public class InMemoryReviewHandler<TState> : IReviewHandler<TState> where TState
     /// <summary>
     /// Represents a review request.
     /// </summary>
-    /// <typeparam name="TState">The type of the workflow state.</typeparam>
-    public class ReviewRequest<TState> where TState : class
+    /// <typeparam name="TReviewState">The type of the workflow state.</typeparam>
+    public class ReviewRequest<TReviewState> where TReviewState : class
     {
         /// <summary>
         /// Gets the workflow run ID.
@@ -162,7 +164,7 @@ public class InMemoryReviewHandler<TState> : IReviewHandler<TState> where TState
         /// <summary>
         /// Gets the workflow state to review.
         /// </summary>
-        public TState State { get; init; } = null!;
+        public TReviewState State { get; init; } = null!;
 
         /// <summary>
         /// Gets the optional context describing what needs to be reviewed.

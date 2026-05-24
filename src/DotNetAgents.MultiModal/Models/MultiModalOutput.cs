@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.MultiModal.Models;
 
 /// <summary>Output from a multi-modal model (e.g. chat completion with mixed content).</summary>

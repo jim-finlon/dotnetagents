@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
@@ -163,8 +165,8 @@ public class InMemoryInputHandler<TState> : IInputHandler<TState> where TState :
     /// <summary>
     /// Represents an input request.
     /// </summary>
-    /// <typeparam name="TState">The type of the workflow state.</typeparam>
-    public class InputRequest<TState> where TState : class
+    /// <typeparam name="TInputState">The type of the workflow state.</typeparam>
+    public class InputRequest<TInputState> where TInputState : class
     {
         /// <summary>
         /// Gets the workflow run ID.
@@ -179,7 +181,7 @@ public class InMemoryInputHandler<TState> : IInputHandler<TState> where TState :
         /// <summary>
         /// Gets the workflow state at the time of the request.
         /// </summary>
-        public TState State { get; init; } = null!;
+        public TInputState State { get; init; } = null!;
 
         /// <summary>
         /// Gets the name of the property to set.

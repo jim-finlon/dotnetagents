@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Voice
 
 Voice command processing package for DotNetAgents, enabling natural language voice command classification and parsing for JARVIS-like AI assistants.

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -24,6 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetAgents.Mcp\DotNetAgents.Mcp.csproj" />
     <ProjectReference Include="..\DotNetAgents.Mcp.Auth\DotNetAgents.Mcp.Auth.csproj" />
-    </ItemGroup>
+  </ItemGroup>
 
 </Project>

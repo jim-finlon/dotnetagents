@@ -1,3 +1,5 @@
+@* SPDX-License-Identifier: Apache-2.0 *@
+
 @page "/workflows"
 @using DotNetAgents.Workflow.Designer
 @using Microsoft.AspNetCore.Components.Web
@@ -87,7 +89,7 @@
         {
             workflows = (await DesignerService.ListWorkflowsAsync()).ToList();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             // Handle error
         }

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.MultiModal.ContentParts;
 
 /// <summary>Content part holding a document (e.g. PDF) path or bytes.</summary>

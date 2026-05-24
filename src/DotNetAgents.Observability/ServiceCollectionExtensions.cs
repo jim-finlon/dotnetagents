@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Observability.Health;
 using DotNetAgents.Observability.Failures;
 using DotNetAgents.Observability.Metrics;

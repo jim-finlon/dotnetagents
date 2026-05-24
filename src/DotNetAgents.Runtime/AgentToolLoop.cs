@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json;
 using DotNetAgents.Abstractions.Tools;
 
@@ -5,7 +7,7 @@ namespace DotNetAgents.Runtime;
 
 /// <summary>
 /// Canonical single-pass tool execution for runtime sessions (story 13775408).
-/// <see cref="AgentExecutor"/> performs multi-iteration ReAct; this type documents and implements
+/// The core agent executor performs multi-iteration ReAct; this type documents and implements
 /// the shared <see cref="ITool"/> contract for one batch of planned calls.
 /// </summary>
 public static class AgentToolLoop

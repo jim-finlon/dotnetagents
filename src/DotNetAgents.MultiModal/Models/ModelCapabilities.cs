@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.MultiModal.Models;
 
 /// <summary>Capabilities supported by a multi-modal model.</summary>

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 // Story c4b3b3e5 — moved from DotNetAgents.Agents.Supervisor to
 // DotNetAgents.Workflow so the workflow-side QualityGateNode can depend on a
 // Workflow-owned contract rather than pulling Supervisor into Workflow.

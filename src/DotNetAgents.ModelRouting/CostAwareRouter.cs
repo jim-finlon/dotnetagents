@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.ModelRouting;
 
 /// <summary>Router that tracks estimated cost and optionally enforces a budget. MR-3.4.</summary>

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text;
 using DotNetAgents.Abstractions.Documents;
 using DocumentFormat.OpenXml.Packaging;
@@ -200,7 +202,7 @@ public class DocxDocumentLoader : IDocumentLoader
         {
             var justification = paragraphProperties.Justification?.Val?.Value;
             if (justification != null)
-                metadata["alignment"] = justification.ToString();
+                metadata["alignment"] = justification.ToString() ?? string.Empty;
         }
     }
 }

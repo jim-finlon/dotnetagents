@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json;
 using DotNetAgents.A2A;
 using DotNetAgents.Mcp.Models;

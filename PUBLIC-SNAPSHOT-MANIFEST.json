@@ -3,10 +3,10 @@
   "category": "public-core",
   "notes": [
     "Private staging snapshot only.",
-    "Public-plugin, premium-plugin, private-factory, hosted-paas, and internal-only packages are intentionally excluded.",
+    "Public-plugin and non-public package categories are intentionally excluded.",
     "Removed ProjectReference edges must be replaced by package references, public abstractions, or package splits before final public release if source compilation requires them."
   ],
-  "packageCount": 73,
+  "packageCount": 75,
   "packages": [
     "DotNetAgents",
     "DotNetAgents.A2A",
@@ -32,6 +32,7 @@
     "DotNetAgents.Analyzers",
     "DotNetAgents.CLI",
     "DotNetAgents.Channels",
+    "DotNetAgents.CognitiveMesh",
     "DotNetAgents.Compliance.Predicates",
     "DotNetAgents.Configuration",
     "DotNetAgents.ContextIntent",
@@ -43,6 +44,7 @@
     "DotNetAgents.Edge",
     "DotNetAgents.Gateway",
     "DotNetAgents.Governance",
+    "DotNetAgents.Hosting",
     "DotNetAgents.Knowledge",
     "DotNetAgents.LaneOps",
     "DotNetAgents.Mcp",
@@ -226,12 +228,6 @@
       "reason": "unclassified-or-outside-public-root",
       "source": "DotNetAgents",
       "target": "DotNetAgents.Providers.vLLM"
-    },
-    {
-      "include": "../../../tools/Dna.Observability.Publisher/Dna.Observability.Publisher.csproj",
-      "reason": "unclassified-or-outside-public-root",
-      "source": "DotNetAgents.Mcp.Server",
-      "target": "Dna.Observability.Publisher"
     }
   ],
   "schemaVersion": 1,

@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -40,6 +41,25 @@
 
 
 
+
+
+
+    <PackageReference Include="DotNetAgents.Storage.TaskKnowledge.PostgreSQL" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Storage.TaskKnowledge.PostgreSQL\DotNetAgents.Storage.PostgreSQL.csproj')" />
+    <PackageReference Include="DotNetAgents.Storage.TaskKnowledge.SqlServer" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Storage.TaskKnowledge.SqlServer\DotNetAgents.Storage.SqlServer.csproj')" />
+    <PackageReference Include="DotNetAgents.Storage.Agents.PostgreSQL" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Storage.Agents.PostgreSQL\DotNetAgents.Storage.Agents.PostgreSQL.csproj')" />
+
+
+    <PackageReference Include="DotNetAgents.VectorStores.Pinecone" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Pinecone\DotNetAgents.VectorStores.Pinecone.csproj')" />
+    <PackageReference Include="DotNetAgents.VectorStores.PostgreSQL" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.PostgreSQL\DotNetAgents.VectorStores.PostgreSQL.csproj')" />
+    <PackageReference Include="DotNetAgents.VectorStores.Weaviate" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Weaviate\DotNetAgents.VectorStores.Weaviate.csproj')" />
+    <PackageReference Include="DotNetAgents.VectorStores.Qdrant" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Qdrant\DotNetAgents.VectorStores.Qdrant.csproj')" />
+    <PackageReference Include="DotNetAgents.VectorStores.Chroma" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Chroma\DotNetAgents.VectorStores.Chroma.csproj')" />
+
+
+    <PackageReference Include="DotNetAgents.Agents.Messaging.RabbitMQ" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.RabbitMQ\DotNetAgents.Agents.Messaging.RabbitMQ.csproj')" />
+    <PackageReference Include="DotNetAgents.Agents.Messaging.Kafka" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.Kafka\DotNetAgents.Agents.Messaging.Kafka.csproj')" />
+    <PackageReference Include="DotNetAgents.Agents.Messaging.Redis" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.Redis\DotNetAgents.Agents.Messaging.Redis.csproj')" />
+    <PackageReference Include="DotNetAgents.Agents.Messaging.SignalR" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.SignalR\DotNetAgents.Agents.Messaging.SignalR.csproj')" />
 
 
 

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.LaneOps;
 
 /// <summary>
@@ -5,7 +7,7 @@ namespace DotNetAgents.LaneOps;
 /// </summary>
 /// <remarks>
 /// The orchestrator is intentionally policy-first: it computes and executes a deterministic,
-/// idempotent sequence through an injected command runner. Host-specific shells, workflow completion,
+/// idempotent sequence through an injected command runner. Host-specific shells, work-item completion recording,
 /// and git remotes stay outside this class so the contract can be tested without mutating repos.
 /// </remarks>
 public sealed class LaneMultiRepoOrchestrator
@@ -86,8 +88,8 @@ public sealed class LaneMultiRepoOrchestrator
     private static string RenderCloseoutDescription(LaneCloseoutMode mode) =>
         mode switch
         {
-            LaneCloseoutMode.RecordStoryCloseoutAtomic => "Record workflow completion atomically with merge completion.",
-            LaneCloseoutMode.CreateExplicitFollowUpStory => "Create an explicit follow-up story instead of marking delivery Done.",
+            LaneCloseoutMode.RecordStoryCloseoutAtomic => "Record work-item completion atomically with merge completion.",
+            LaneCloseoutMode.CreateExplicitFollowUpStory => "Create an explicit follow-up work item instead of marking delivery Done.",
             _ => "Record completion state.",
         };
 
@@ -108,10 +110,10 @@ public sealed class LaneMultiRepoOrchestrator
                 break;
             case MultiRepoLaneStepKind.ParentFastForwardMain:
                 actions.Add(new("rollback-parent-main", $"Reset parent {plan.ParentMainBranch} to its pre-merge ref if it moved locally but push failed.", MutatesState: true));
-                actions.Add(new("record-follow-up", "If parent main changed remotely, create a follow-up story and attach the partial merge state instead of hiding the mid-failure.", MutatesState: false));
+                actions.Add(new("record-follow-up", "If parent main changed remotely, create a follow-up work item and attach the partial merge state instead of hiding the mid-failure.", MutatesState: false));
                 break;
             case MultiRepoLaneStepKind.Closeout:
-                actions.Add(new("record-completion-or-follow-up", "Retry record_work_item_completion, or create an explicit follow-up story when the completion gate is unsatisfied.", MutatesState: false));
+                actions.Add(new("record-completion-or-follow-up", "Retry record_work_item_completion, or create an explicit follow-up work item when the completion gate is unsatisfied.", MutatesState: false));
                 break;
             case MultiRepoLaneStepKind.Cleanup:
                 actions.Add(new("retry-cleanup", "Retry cleanup only after merge and completion evidence are durable.", MutatesState: true));

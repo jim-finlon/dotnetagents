@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -98,11 +100,14 @@ public sealed class A2AClient : IA2AClient
 
         // Minimal SSE parser: lines starting with "data:" are payloads; blank line dispatches.
         var dataLines = new List<string>();
-        while (!reader.EndOfStream)
+        while (true)
         {
             cancellationToken.ThrowIfCancellationRequested();
             var line = await reader.ReadLineAsync(cancellationToken).ConfigureAwait(false);
-            if (line is null) break;
+            if (line is null)
+            {
+                break;
+            }
 
             if (line.Length == 0)
             {

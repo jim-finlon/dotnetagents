@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.PublicSubstitutes.Tasks;
 
 /// <summary>Query shape for lightweight public task records.</summary>

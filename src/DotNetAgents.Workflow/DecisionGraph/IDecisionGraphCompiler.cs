@@ -1,10 +1,12 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Workflow.DecisionGraph;
 
 /// <summary>
 /// Compiler contract that maps a validated <see cref="DecisionGraphDefinition"/>
 /// into a runtime-executable representation. Story 55db0c7d.
 ///
-/// The actual mapping into <see cref="StateGraph{TState}"/> / behavior-tree /
+/// The actual mapping into state-graph / behavior-tree /
 /// workflow primitives is the runtime executor story (67a5c613). This interface
 /// exists so the validator + operator API + MCP tools can take a dependency
 /// today and the runtime impl can land later without changing call sites.

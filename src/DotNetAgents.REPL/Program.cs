@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.CommandLine;
 using DotNetAgents.Core.Chains;
 using DotNetAgents.Core.Prompts;
@@ -50,7 +52,7 @@ class Program
         Console.WriteLine();
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        var logger = loggerFactory.CreateLogger<Program>();
+        ILogger logger = loggerFactory.CreateLogger<Program>();
 
         while (true)
         {
@@ -78,11 +80,11 @@ class Program
                         break;
 
                     case "chain":
-                        await HandleChainCommandAsync(args, logger);
+                        await HandleChainCommandAsync(args, logger!);
                         break;
 
                     case "workflow":
-                        await HandleWorkflowCommandAsync(args, logger);
+                        await HandleWorkflowCommandAsync(args, logger!);
                         break;
 
                     case "prompt":

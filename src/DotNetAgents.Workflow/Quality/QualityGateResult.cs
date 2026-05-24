@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 // Story c4b3b3e5 — moved from DotNetAgents.Agents.Supervisor to
 // DotNetAgents.Workflow with IQualityGate.
 namespace DotNetAgents.Workflow;

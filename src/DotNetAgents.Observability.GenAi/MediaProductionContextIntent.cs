@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -82,11 +84,13 @@ public static class MediaProductionContextIntent
 {
     /// <summary>Build a tool-boundary ContextIntent v1 payload.</summary>
     /// <param name="toolName">MCP/A2A tool name (e.g. <c>generate_test_clip</c>, <c>estimate_cost</c>).</param>
-    /// <param name="taskId">Stable task id (SDLC story id, storyboard id, or operator-assigned handle). Falls back to a tool-name-prefixed guid when unset.</param>
+    /// <param name="taskId">Stable task id (work-item id, storyboard id, or operator-assigned handle). Falls back to a tool-name-prefixed guid when unset.</param>
     /// <param name="actorType">Actor type per the v1 schema enum. Default: <c>AgentInstance</c>.</param>
     /// <param name="actorId">Stable actor id (e.g. <c>agent-alpha</c>).</param>
     /// <param name="goal">One-sentence goal statement.</param>
     /// <param name="extraLayers">Optional tool-specific layers; the manifest layer is always added.</param>
+    /// <param name="constraints">Optional execution constraints to include in the intent.</param>
+    /// <param name="acceptance">Optional acceptance criteria to include in the intent.</param>
     public static ContextIntentV1 ForToolBoundary(
         string toolName,
         string? taskId,

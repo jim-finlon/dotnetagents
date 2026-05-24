@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Voice.Dialog.StateMachines;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -69,7 +71,7 @@ public static class ServiceCollectionExtensions
 
         if (stateMachineFactory != null)
         {
-            services.TryAddSingleton(stateMachineFactory);
+            services.TryAddSingleton<IDialogStateMachine<DialogContext>>(sp => stateMachineFactory(sp)!);
         }
 
         // Register dialog manager with state machine support

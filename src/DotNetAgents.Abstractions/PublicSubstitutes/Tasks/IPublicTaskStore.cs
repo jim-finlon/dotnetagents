@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.PublicSubstitutes.Tasks;
 
 /// <summary>
 /// Lightweight task/work-state surface for public examples.
-/// Implementations must not expose private SDLC review, quality score, completion-policy, or lane metadata.
+/// Implementations must not expose private workflow review, eval-governance, completion-policy, or lane metadata.
 /// </summary>
 public interface IPublicTaskStore
 {

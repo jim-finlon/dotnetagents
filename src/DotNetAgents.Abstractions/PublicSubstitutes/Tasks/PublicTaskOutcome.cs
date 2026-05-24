@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.PublicSubstitutes.Tasks;
 
 /// <summary>Flattened outcome for a public task.</summary>

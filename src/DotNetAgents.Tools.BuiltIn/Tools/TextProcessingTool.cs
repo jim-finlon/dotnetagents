@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -125,7 +127,7 @@ public class TextProcessingTool : ITool
             var result = new Dictionary<string, object>
             {
                 ["matched"] = match.Success,
-                ["value"] = match.Success ? match.Value : null,
+                ["value"] = match.Success ? match.Value : string.Empty,
                 ["groups"] = match.Groups.Cast<Group>().Select(g => new Dictionary<string, object>
                 {
                     ["value"] = g.Value,

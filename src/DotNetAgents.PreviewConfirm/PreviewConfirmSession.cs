@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.PreviewConfirm;
 
 /// <summary>Lifecycle for a single preview/confirm gate.</summary>

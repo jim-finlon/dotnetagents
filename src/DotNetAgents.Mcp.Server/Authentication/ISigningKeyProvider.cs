@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using Microsoft.IdentityModel.Tokens;
 
 namespace DotNetAgents.Mcp.Server.Authentication;

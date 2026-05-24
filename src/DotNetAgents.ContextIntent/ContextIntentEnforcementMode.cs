@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.ContextIntent;
 
 /// <summary>
@@ -11,7 +13,7 @@ public enum ContextIntentEnforcementMode
     /// <summary>No enforcement — handoffs with or without envelopes pass silently. Test/legacy only.</summary>
     Off = 0,
 
-    /// <summary>Missing envelopes log a warning + emit a SDLC-friction event but do not block the handoff. Default for soft-rollout window.</summary>
+    /// <summary>Missing envelopes log a warning + emit a governance-friction event but do not block the handoff. Default for soft-rollout window.</summary>
     WarnOnMissing = 1,
 
     /// <summary>Missing envelopes block the handoff with an error. Production posture once rollout window is over.</summary>

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Abstractions.Chains;
 using DotNetAgents.Abstractions.Exceptions;
 
@@ -16,7 +18,6 @@ public class WorkflowBuilder<TState> where TState : class
     /// <summary>
     /// Creates a new workflow builder.
     /// </summary>
-    /// <typeparam name="TState">The type of the workflow state.</typeparam>
     /// <returns>A new workflow builder instance.</returns>
     public static WorkflowBuilder<TState> Create()
     {

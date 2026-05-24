@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Agents.BehaviorTrees
 
 Behavior tree implementation for hierarchical decision-making in autonomous agents.

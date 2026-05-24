@@ -1,8 +1,11 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Mcp.Auth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace DotNetAgents.Mcp.Server.Authentication;
@@ -89,7 +92,24 @@ public static class McpPkceTokenEndpointExtensions
         }
 
         var store = http.RequestServices.GetRequiredService<IPkceChallengeStore>();
-        var record = await store.ConsumeAsync(code, http.RequestAborted).ConfigureAwait(false);
+        // Story 9390068a — wrap every post-form step in try/catch so server-side
+        // failures (transient signing-key fetch, store contention, issuer faults)
+        // surface as structured RFC 6749 envelopes instead of empty-body Kestrel
+        // 500s. Spec-compliant MCP clients (codex/claude/cursor) need to
+        // distinguish "service is misconfigured" from "service is unreachable"
+        // from "token is bad" — RFC 6749 §5.2 mandates a JSON body for the
+        // failure case.
+        PkceChallengeRecord? record;
+        try
+        {
+            record = await store.ConsumeAsync(code, http.RequestAborted).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            LogTokenEndpointFault(http, ex, "consume_challenge");
+            return ServerError("Authorization code lookup failed.");
+        }
+
         if (record is null)
         {
             return TokenError("invalid_grant", "Authorization code unknown or expired.");
@@ -100,14 +120,33 @@ public static class McpPkceTokenEndpointExtensions
             return TokenError("invalid_grant", "client_id does not match the issued authorization code.");
         }
 
-        if (!PkceVerifier.Verify(verifier, record.CodeChallenge, record.CodeChallengeMethod))
+        bool pkceOk;
+        try
+        {
+            pkceOk = PkceVerifier.Verify(verifier, record.CodeChallenge, record.CodeChallengeMethod);
+        }
+        catch (Exception ex)
+        {
+            LogTokenEndpointFault(http, ex, "pkce_verify");
+            return ServerError("PKCE verification raised an unexpected fault.");
+        }
+
+        if (!pkceOk)
         {
             return TokenError("invalid_grant", "PKCE code_verifier did not match the stored code_challenge.");
         }
 
         var issuer = http.RequestServices.GetService<IMcpPkceTokenIssuer>() ?? new DefaultMcpPkceTokenIssuer();
-        var token = await issuer.IssueAsync(new McpPkceTokenIssuance(clientId, record), http.RequestAborted).ConfigureAwait(false);
-        return Results.Json(token);
+        try
+        {
+            var token = await issuer.IssueAsync(new McpPkceTokenIssuance(clientId, record), http.RequestAborted).ConfigureAwait(false);
+            return Results.Json(token);
+        }
+        catch (Exception ex)
+        {
+            LogTokenEndpointFault(http, ex, "token_issuance");
+            return ServerError("Token issuance failed for this authorization code.");
+        }
     }
 
     private static IResult TokenError(string error, string description)
@@ -117,6 +156,29 @@ public static class McpPkceTokenEndpointExtensions
             error,
             error_description = description,
         }, statusCode: StatusCodes.Status400BadRequest);
+    }
+
+    /// <summary>
+    /// Story 9390068a — RFC 6749 §5.2 <c>server_error</c> envelope returned with
+    /// HTTP 500 so clients can parse a JSON body instead of receiving an empty
+    /// Kestrel page. We deliberately do NOT leak the underlying exception type
+    /// or signing-key state into <c>error_description</c>; operators get the
+    /// detail through the structured log at the call site.
+    /// </summary>
+    private static IResult ServerError(string description)
+    {
+        return Results.Json(new
+        {
+            error = "server_error",
+            error_description = description,
+        }, statusCode: StatusCodes.Status500InternalServerError);
+    }
+
+    private static void LogTokenEndpointFault(HttpContext http, Exception ex, string phase)
+    {
+        var loggerFactory = http.RequestServices.GetService<Microsoft.Extensions.Logging.ILoggerFactory>();
+        var logger = loggerFactory?.CreateLogger("DotNetAgents.Mcp.Server.Authentication.McpPkceTokenEndpoint");
+        logger?.LogError(ex, "MCP PKCE token endpoint faulted during {Phase}.", phase);
     }
 }
 

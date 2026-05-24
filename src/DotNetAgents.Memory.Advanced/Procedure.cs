@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Memory.Advanced;
 
 /// <summary>Procedure (sequence of steps). FR-MEM-003.</summary>

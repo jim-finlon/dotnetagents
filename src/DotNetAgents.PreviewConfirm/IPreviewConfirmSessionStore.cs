@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.PreviewConfirm;
 
 /// <summary>Persistence for preview/confirm sessions (in-memory, Redis, or DB).</summary>

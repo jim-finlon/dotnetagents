@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.PublicSubstitutes.Evals;
 
 /// <summary>
-/// Records public eval-run summaries for examples, CI, and private-factory adapters.
+/// Records public eval-run summaries for examples, CI, and hosted adapters.
 /// Implementations expose flattened pass/fail/score data only; private scoring
 /// rubrics and experiment lineage stay behind adapter boundaries.
 /// </summary>

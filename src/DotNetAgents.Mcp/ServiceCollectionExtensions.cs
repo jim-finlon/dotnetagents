@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Ecosystem;
 using DotNetAgents.Mcp.Adapters;
 using DotNetAgents.Mcp.Abstractions;

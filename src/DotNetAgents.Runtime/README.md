@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Runtime
 
 `DotNetAgents.Runtime` is the runtime and trajectory skeleton for Hermes/GEPA-inspired orchestration work. The first tranche is intentionally small: it records sessions, messages, model calls, tool invocations, context snapshots, and trajectory artifacts without requiring external model credentials.
@@ -9,7 +11,7 @@ Primary extension seams:
 - `IAgentSessionStore` owns durable session lineage for interactive, compressed, scheduled, child, and delegated sessions.
 - `ITrajectoryRecorder` emits structured artifacts that later EvaluationSandbox, GEPA/quality score optimizers, and replay tooling can consume.
 - `IAgentTurnModel` and `IToolsetResolver` keep provider routing and tool catalogs replaceable.
-- `IDelegationBroker`, `IDelegationPolicy`, and `IDelegatedRunStore` provide a bounded delegated-agent primitive for summary-only subagent work without promoting every task into an SDLC worktree lane.
+- `IDelegationBroker`, `IDelegationPolicy`, and `IDelegatedRunStore` provide a bounded delegated-agent primitive for summary-only subagent work without promoting every task into an isolated implementation lane.
 - `IExecutionEnvironmentProvider`, `ICommandExecutor`, `IArtifactCollector`, and `IEnvironmentCleanupPolicy` describe scoped execution leases with blast-radius, credential, network, persistence, approval, command-output, artifact, and cleanup receipt metadata.
 - `AgentProgramDefinition` and `AgentCompiledVariant` describe authored agent programs and optimizer-produced variants without embedding optimizer execution, raw prompt text, or credentials.
 - Placeholder seams identify later integration points for memory compaction, toolset catalog policy, scheduled jobs, gateway sessions, and EvaluationSandbox fixtures.
@@ -18,11 +20,11 @@ Primary extension seams:
 
 `InProcessDelegationBroker` starts a child `AgentRunMode.Delegated` session through `IAgentRuntime`, records parent-child lineage, and returns only a concise summary plus artifact and trajectory refs. It is for bounded research, summarization, verification, and parallel tool work inside an already-owned runtime session.
 
-It is not SDLC story ownership, automated worker execution, deployment approval, or a substitute for operator console completion. Default policy rejects recursive delegation, credential/secret tools, memory-write tools, destructive filesystem/shell tools, schedule/cron creation, and production deploy actions unless a later explicit policy story grants a bounded exception.
+It is not backlog work-item ownership, automated worker execution, deployment approval, or a substitute for operator console completion recording. Default policy rejects recursive delegation, credential/secret tools, memory-write tools, destructive filesystem/shell tools, schedule/cron creation, and production deploy actions unless a later explicit policy story grants a bounded exception.
 
 ## Execution Environment Leases
 
-`InMemoryExecutionEnvironmentProvider` is the v1 test provider for the execution lease contract. It creates scoped fake worktree leases, records actor/purpose/base commit/path/branch metadata, exposes safe command output and artifact references, and only cleans the exact path owned by the lease. It does not execute shell commands or delete files; real providers should adapt the same contract around DNA worktree scripts, Docker/container sandboxes, SSH hosts, k3s jobs, or cloud sandboxes while preserving path-scoped cleanup receipts and secret-free output references.
+`InMemoryExecutionEnvironmentProvider` is the v1 test provider for the execution lease contract. It creates scoped fake worktree leases, records actor/purpose/base commit/path/branch metadata, exposes safe command output and artifact references, and only cleans the exact path owned by the lease. It does not execute shell commands or delete files; real providers should adapt the same contract around host worktree scripts, Docker/container sandboxes, SSH hosts, k3s jobs, or cloud sandboxes while preserving path-scoped cleanup receipts and secret-free output references.
 
 ## Agent Program Contracts
 

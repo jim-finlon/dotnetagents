@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.PublicSubstitutes.Memory;
 
 /// <summary>
 /// Stores public durable-memory lessons. Implementations may be in-memory,
-/// local file-backed, premium, or private-factory backed.
+/// local file-backed, hosted, or vendor-backed.
 /// </summary>
 public interface IPublicLessonStore
 {

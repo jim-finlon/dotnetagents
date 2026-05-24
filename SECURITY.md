@@ -32,7 +32,7 @@ to `10.0.6` for the `DotNetAgents.Documents` project:
   Condition="'$(MSBuildProjectName)' == 'DotNetAgents.Documents'" />
 ```
 
-This mirrors the private `DNA/Directory.Build.props` pin. The conditional
+This mirrors the private source-tree `Directory.Build.props` pin. The conditional
 limits the pin to the one project that actually uses the transitive — every
 other public-core package builds unchanged.
 
@@ -49,7 +49,7 @@ Remove the pin once **all** of the following are true:
 2. A clean `dotnet restore` against the staging `DotNetAgents.Public.sln`
    reports no `NU1903` advisory for `DotNetAgents.Documents` without the
    `Directory.Build.props` pin.
-3. The matching private `DNA/Directory.Build.props` pin is removed in the
+3. The matching private source-tree `Directory.Build.props` pin is removed in the
    same change so private and public surfaces stay in lockstep.
 
 ### Owner

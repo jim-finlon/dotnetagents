@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Diagnostics;
 using System.IO.Abstractions;
 using DotNetAgents.Voice.Transcription.Models;

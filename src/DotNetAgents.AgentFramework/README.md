@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.AgentFramework
 
 Integration package for Microsoft Agent Framework compatibility.

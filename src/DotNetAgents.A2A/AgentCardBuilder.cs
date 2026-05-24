@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.A2A;
 
 /// <summary>Builds an <see cref="AgentCard"/> from agent metadata. FR-A2A-001 (card generation from agent metadata).</summary>

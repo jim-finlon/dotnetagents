@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -6,6 +7,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>13</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsTestProject>false</IsTestProject>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <Description>Shared MCP conformance utilities for DNA: xUnit base McpInstructionsConformanceTests&lt;TProgram&gt;, canonical error codes, tool-call failure envelope validation, argument sanitization for logs, and high-impact tool heuristics.</Description>
   </PropertyGroup>

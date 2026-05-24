@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Security.Audit;
 using DotNetAgents.Security.RateLimiting;
 using DotNetAgents.Security.Secrets;

@@ -1,10 +1,12 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json;
 
 namespace DotNetAgents.Runtime;
 
 /// <summary>
 /// Session-scoped agent turn runner with trajectory recording. For multi-iteration ReAct loops use
-/// <see cref="DotNetAgents.Core.Agents.AgentExecutor"/>; see <c>docs/architecture/AGENT-EXECUTOR-VS-AGENT-RUNTIME.md</c>.
+/// the core agent executor; see <c>docs/architecture/AGENT-EXECUTOR-VS-AGENT-RUNTIME.md</c>.
 /// </summary>
 public sealed class AgentRuntime : IAgentRuntime
 {

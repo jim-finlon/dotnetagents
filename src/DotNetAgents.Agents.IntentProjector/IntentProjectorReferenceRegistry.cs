@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Agents.IntentProjector;
 
 public static class IntentProjectorReferenceRegistry

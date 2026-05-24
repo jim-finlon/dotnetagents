@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Workflow.Graph;
 using DotNetAgents.Workflow.HumanInLoop;
 using Microsoft.Extensions.Logging;

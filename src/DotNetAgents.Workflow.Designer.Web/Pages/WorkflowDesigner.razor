@@ -1,3 +1,5 @@
+@* SPDX-License-Identifier: Apache-2.0 *@
+
 @page "/designer"
 @page "/designer/{WorkflowId}"
 @using DotNetAgents.Workflow.Designer
@@ -93,7 +95,6 @@
             <article class="panel-card">
                 <h2>Execution status</h2>
                 <p class="panel-card__subtitle">@executionStatus</p>
-                <p><strong>Current node:</strong> @(currentExecutingNode ?? "—")</p>
                 <button type="button" class="btn btn-danger" @onclick="StopExecution">Stop</button>
             </article>
         </section>
@@ -108,7 +109,6 @@
     private string? draggedNodeType;
     private bool showExecutionPanel = false;
     private string executionStatus = "Idle";
-    private string? currentExecutingNode;
     private Dictionary<string, string> executionStates = new();
 
     protected override async Task OnInitializedAsync()

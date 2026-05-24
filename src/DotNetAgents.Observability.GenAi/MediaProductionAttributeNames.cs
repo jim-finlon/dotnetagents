@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Observability.GenAi;
 
 /// <summary>
@@ -39,6 +41,6 @@ public static class MediaProductionAttributeNames
     /// <summary>MCP tool name servicing the call (e.g. <c>generate_test_clip</c>). Low-cardinality.</summary>
     public const string ToolName = "media.tool.name";
 
-    /// <summary>Actor id that initiated the call (e.g. <c>agent-alpha</c>, <c>agent-alpha</c>). Low-cardinality.</summary>
+    /// <summary>Actor id that initiated the call (e.g. <c>agent-alpha</c>, <c>agent-beta</c>). Low-cardinality.</summary>
     public const string ActorId = "media.actor.id";
 }

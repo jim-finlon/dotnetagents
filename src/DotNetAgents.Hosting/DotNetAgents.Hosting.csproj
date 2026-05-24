@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Description>Public-core ASP.NET Core host composition for DNA services. Option records and extension methods for baseline service host options, health endpoint mapping, ProblemDetails defaults, and startup receipts. Must not depend on AgentProjects, private factory packages, or service-specific infrastructure (story 5b21021f).</Description>
+    <PackageTags>$(PackageTags);hosting;aspnetcore;composition</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetAgents.A2A.Server\DotNetAgents.A2A.Server.csproj" />
+    <ProjectReference Include="..\DotNetAgents.Mcp.Server\DotNetAgents.Mcp.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="DotNetAgents.Hosting.Tests" />
+  </ItemGroup>
+
+</Project>

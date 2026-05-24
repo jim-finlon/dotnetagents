@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.ObjectModel;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
@@ -284,13 +286,13 @@ public class EnhancedWorkflowStateInspector<TState> : WorkflowStateInspector<TSt
     /// <summary>
     /// Represents a history entry for state snapshots.
     /// </summary>
-    /// <typeparam name="TState">The type of the workflow state.</typeparam>
-    public class StateHistoryEntry<TState> where TState : class
+    /// <typeparam name="THistoryState">The type of the workflow state.</typeparam>
+    public class StateHistoryEntry<THistoryState> where THistoryState : class
     {
         /// <summary>
         /// Gets the state snapshot.
         /// </summary>
-        public StateSnapshot<TState> Snapshot { get; init; } = null!;
+        public StateSnapshot<THistoryState> Snapshot { get; init; } = null!;
 
         /// <summary>
         /// Gets the optional context describing when/why this snapshot was taken.

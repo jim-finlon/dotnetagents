@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.StructuredOutput;
 
 /// <summary>Helper for JSON Schema from types. FR-SO-003.</summary>

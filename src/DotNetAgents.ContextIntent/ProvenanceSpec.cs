@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json.Serialization;
 
 namespace DotNetAgents.ContextIntent;
@@ -30,7 +32,7 @@ public sealed record ProvenanceSpec
     public string? DerivedFromTaskId { get; init; }
 }
 
-/// <summary>Actor identity. Use the SDLC actor enum.</summary>
+/// <summary>Actor identity. Use the host's actor-type vocabulary.</summary>
 public sealed record ActorRef(
     [property: JsonPropertyName("actor_type")] string ActorType,
     [property: JsonPropertyName("actor_id")] string ActorId,
@@ -42,7 +44,7 @@ public enum ProvenanceOrigin
 {
     [JsonStringEnumMemberName("voice_note")] VoiceNote,
     [JsonStringEnumMemberName("chat")] Chat,
-    [JsonStringEnumMemberName("sdlc_story")] SdlcStory,
+    [JsonStringEnumMemberName("work_item")] WorkItem,
     [JsonStringEnumMemberName("operator_cli")] OperatorCli,
     [JsonStringEnumMemberName("agent_emission")] AgentEmission,
     [JsonStringEnumMemberName("scheduled_task")] ScheduledTask,

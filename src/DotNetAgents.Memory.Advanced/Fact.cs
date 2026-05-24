@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Memory.Advanced;
 
 /// <summary>Knowledge triple (subject, predicate, object). FR-MEM-002.</summary>

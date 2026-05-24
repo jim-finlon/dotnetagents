@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.Intent;
 
 /// <summary>Cross-surface helpers for <see cref="AgentDispatchIntent"/> (story 305dd821).</summary>

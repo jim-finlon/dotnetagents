@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Knowledge
 
 Knowledge repository for capturing and querying learning from agent execution.

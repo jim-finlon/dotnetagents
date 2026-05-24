@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Mcp
 
 MCP (Model Context Protocol) client library for DotNetAgents, enabling integration with MCP-enabled agent hosts and tool surfaces.

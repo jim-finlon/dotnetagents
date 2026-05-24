@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Behavior Tree Integration Files
 
 **Note**: These files have been moved to avoid circular dependencies.

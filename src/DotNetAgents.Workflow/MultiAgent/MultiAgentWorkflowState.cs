@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Agents.Tasks;
 
 namespace DotNetAgents.Workflow.MultiAgent;

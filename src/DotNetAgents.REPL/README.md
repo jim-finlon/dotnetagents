@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents REPL
 
 Interactive Read-Eval-Print Loop (REPL) for testing and experimenting with DotNetAgents chains and workflows.

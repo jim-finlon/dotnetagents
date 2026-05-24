@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.ModelRouting;
 
 /// <summary>Routes by matching required capabilities to model capabilities. FR-MR-002.</summary>

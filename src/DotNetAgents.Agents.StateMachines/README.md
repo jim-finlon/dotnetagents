@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Agents.StateMachines
 
 State machine implementation for managing agent lifecycle and operational states in the DotNetAgents framework.

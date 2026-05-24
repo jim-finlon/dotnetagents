@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Tasks
 
 Task management capabilities for DotNetAgents workflows and agents.

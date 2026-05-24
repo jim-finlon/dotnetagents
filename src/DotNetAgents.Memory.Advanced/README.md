@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Memory.Advanced
 
 `DotNetAgents.Memory.Advanced` owns local, assembly-time memory structures:

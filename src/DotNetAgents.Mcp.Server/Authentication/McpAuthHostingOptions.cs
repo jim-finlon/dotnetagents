@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Mcp.Server.Authentication;
 
 /// <summary>
@@ -32,4 +34,17 @@ public sealed class McpAuthHostingOptions
     /// <c>false</c>; operators flip per-service when they want to accept forwarded tokens.
     /// </summary>
     public bool AdvertiseCrossAppAccess { get; set; }
+
+    /// <summary>
+    /// Durable consent store provider. Supported values: <c>InMemory</c>
+    /// (default) and <c>File</c>. Core 4 services should use <c>File</c>
+    /// until they move to a shared database-backed implementation.
+    /// </summary>
+    public string ConsentStoreProvider { get; set; } = "InMemory";
+
+    /// <summary>
+    /// Optional path for the file-backed consent store. When omitted the
+    /// store uses a per-user local application data path.
+    /// </summary>
+    public string? ConsentStoreFilePath { get; set; }
 }

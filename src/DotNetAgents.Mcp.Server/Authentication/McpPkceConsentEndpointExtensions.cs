@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Security.Cryptography;
 using DotNetAgents.Mcp.Auth;
 using Microsoft.AspNetCore.Builder;
@@ -78,7 +80,12 @@ public static class McpPkceConsentEndpointExtensions
             var skipPromptOk = !string.Equals(prompt, "consent", StringComparison.OrdinalIgnoreCase);
             if (skipPromptOk)
             {
-                var existing = await consentStore.FindCoveringAsync(actorId, clientId, requestedScopes, http.RequestAborted).ConfigureAwait(false);
+                var existing = await consentStore.FindCoveringAsync(
+                    actorId,
+                    clientId,
+                    requestedScopes,
+                    http.RequestAborted,
+                    serviceName).ConfigureAwait(false);
                 if (existing is not null && existing.Decision == PkceConsentDecision.Allow)
                 {
                     var code = await MintAuthorizationCodeAsync(http, clientId, codeChallenge, codeChallengeMethod);
@@ -144,7 +151,8 @@ public static class McpPkceConsentEndpointExtensions
                     ClientId: clientId,
                     Scopes: requestedScopes,
                     Decision: PkceConsentDecision.Deny,
-                    GrantedAtUtc: DateTimeOffset.UtcNow), http.RequestAborted);
+                    GrantedAtUtc: DateTimeOffset.UtcNow,
+                    ServiceName: serviceName), http.RequestAborted);
 
                 // Per RFC 6749 §4.1.2.1 access_denied is the canonical denial signal.
                 return Results.Redirect(BuildErrorRedirectUri(redirectUri, "access_denied", state), permanent: false);
@@ -156,7 +164,8 @@ public static class McpPkceConsentEndpointExtensions
                 ClientId: clientId,
                 Scopes: requestedScopes,
                 Decision: PkceConsentDecision.Allow,
-                GrantedAtUtc: DateTimeOffset.UtcNow), http.RequestAborted);
+                GrantedAtUtc: DateTimeOffset.UtcNow,
+                ServiceName: serviceName), http.RequestAborted);
 
             var code = await MintAuthorizationCodeAsync(http, clientId, codeChallenge, codeChallengeMethod);
             return Results.Redirect(BuildRedirectUri(redirectUri, code, state), permanent: false);
@@ -170,8 +179,10 @@ public static class McpPkceConsentEndpointExtensions
         {
             var consentStore = http.RequestServices.GetRequiredService<IPkceConsentStore>();
             var actorFilter = http.Request.Query["actorId"].ToString();
+            var includeRevoked = bool.TryParse(http.Request.Query["includeRevoked"].ToString(), out var parsed) && parsed;
             var consents = await consentStore.ListAsync(
                 actorIdFilter: string.IsNullOrWhiteSpace(actorFilter) ? null : actorFilter,
+                includeRevoked: includeRevoked,
                 cancellationToken: http.RequestAborted).ConfigureAwait(false);
 
             return Results.Json(consents.Select(c => new
@@ -179,10 +190,12 @@ public static class McpPkceConsentEndpointExtensions
                 id = c.Id,
                 actorId = c.ActorId,
                 clientId = c.ClientId,
+                serviceName = c.ServiceName,
                 scopes = c.Scopes,
                 decision = c.Decision.ToString(),
                 grantedAtUtc = c.GrantedAtUtc,
                 expiresAtUtc = c.ExpiresAtUtc,
+                revokedAtUtc = c.RevokedAtUtc,
             }).ToList());
         })
         .WithName("McpPkceAdminConsents")

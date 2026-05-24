@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Tasks.Models;
 using TaskStatus = DotNetAgents.Tasks.Models.TaskStatus;
 

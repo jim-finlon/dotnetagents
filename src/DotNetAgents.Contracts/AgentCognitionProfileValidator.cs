@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Contracts;
 
 /// <summary>Validation helpers for the DNA Agent cognition contract.</summary>

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Agents.Messaging;
 using DotNetAgents.Agents.Registry;
 using DotNetAgents.Agents.Tasks;
@@ -56,12 +58,12 @@ public static class ServiceCollectionExtensions
 
         if (stateMachineFactory != null)
         {
-            services.TryAddSingleton(stateMachineFactory);
+            services.TryAddSingleton<ISupervisorStateMachine<SupervisorContext>>(sp => stateMachineFactory(sp)!);
         }
 
         if (taskRouterFactory != null)
         {
-            services.TryAddSingleton(taskRouterFactory);
+            services.TryAddSingleton<ITaskRouter>(sp => taskRouterFactory(sp)!);
         }
 
         services.TryAddSingleton<ISupervisorAgent>(sp =>

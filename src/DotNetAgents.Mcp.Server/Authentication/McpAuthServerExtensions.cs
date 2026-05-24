@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Mcp.Auth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -38,7 +40,7 @@ public static class McpAuthServerExtensions
         }
 
         services.TryAddSingleton<IPkceChallengeStore, InMemoryPkceChallengeStore>();
-        services.TryAddSingleton<IPkceConsentStore, InMemoryPkceConsentStore>();
+        AddPkceConsentStore(services, configuration);
         services.TryAddSingleton<IMcpPkceTokenIssuer, DefaultMcpPkceTokenIssuer>();
         services.TryAddSingleton<McpAuthEnabledMarker>();
         return services;
@@ -69,5 +71,21 @@ public static class McpAuthServerExtensions
         endpoints.MapMcpPkceConsentEndpoints(serviceName);
 
         return endpoints;
+    }
+
+    private static void AddPkceConsentStore(IServiceCollection services, IConfiguration? configuration)
+    {
+        var provider = configuration?[McpAuthHostingOptions.SectionName + ":ConsentStoreProvider"];
+        if (string.Equals(provider, "File", StringComparison.OrdinalIgnoreCase))
+        {
+            services.Configure<DurableFilePkceConsentStoreOptions>(options =>
+            {
+                options.FilePath = configuration?[McpAuthHostingOptions.SectionName + ":ConsentStoreFilePath"];
+            });
+            services.TryAddSingleton<IPkceConsentStore, DurableFilePkceConsentStore>();
+            return;
+        }
+
+        services.TryAddSingleton<IPkceConsentStore, InMemoryPkceConsentStore>();
     }
 }

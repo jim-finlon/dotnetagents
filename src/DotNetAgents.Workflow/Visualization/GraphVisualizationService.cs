@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Workflow.Graph;
 using System.Text;
 using System.Text.Json;

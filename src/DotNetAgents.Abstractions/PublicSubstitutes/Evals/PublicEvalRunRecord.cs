@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.PublicSubstitutes.Evals;
 
 /// <summary>Public eval-run projection with flattened case results.</summary>

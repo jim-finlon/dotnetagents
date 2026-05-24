@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Net;
 using System.Net.Mail;
 using System.Text.Json;

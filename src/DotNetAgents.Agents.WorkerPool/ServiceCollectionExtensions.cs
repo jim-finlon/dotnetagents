@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -50,7 +52,7 @@ public static class ServiceCollectionExtensions
 
         if (stateProviderFactory != null)
         {
-            services.TryAddSingleton(stateProviderFactory);
+            services.TryAddSingleton<IWorkerStateProvider>(sp => stateProviderFactory(sp)!);
         }
 
         services.TryAddSingleton<IWorkerPool>(sp =>

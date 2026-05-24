@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
@@ -167,8 +169,8 @@ public class InMemoryDecisionHandler<TState> : IDecisionHandler<TState> where TS
     /// <summary>
     /// Represents a decision request.
     /// </summary>
-    /// <typeparam name="TState">The type of the workflow state.</typeparam>
-    public class DecisionRequest<TState> where TState : class
+    /// <typeparam name="TDecisionState">The type of the workflow state.</typeparam>
+    public class DecisionRequest<TDecisionState> where TDecisionState : class
     {
         /// <summary>
         /// Gets the workflow run ID.
@@ -183,7 +185,7 @@ public class InMemoryDecisionHandler<TState> : IDecisionHandler<TState> where TS
         /// <summary>
         /// Gets the workflow state at the time of the request.
         /// </summary>
-        public TState State { get; init; } = null!;
+        public TDecisionState State { get; init; } = null!;
 
         /// <summary>
         /// Gets the question to present to the human.

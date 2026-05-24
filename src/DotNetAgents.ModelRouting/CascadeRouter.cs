@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.ModelRouting;
 
 /// <summary>Cascade router implementation: invokes a delegate per tier to get confidence, escalates when below threshold. FR-MR-001.</summary>

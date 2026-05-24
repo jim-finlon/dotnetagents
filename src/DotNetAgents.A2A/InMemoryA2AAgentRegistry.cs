@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.A2A;
 
 /// <summary>In-memory A2A agent registry with capability search and health. A2A-4.3.</summary>

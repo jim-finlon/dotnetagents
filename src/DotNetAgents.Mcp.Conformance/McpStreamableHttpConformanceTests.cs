@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;

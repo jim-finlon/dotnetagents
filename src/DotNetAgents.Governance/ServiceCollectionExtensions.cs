@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Governance.Connectors;
 using DotNetAgents.Governance.Identity;
 using Microsoft.Extensions.DependencyInjection;

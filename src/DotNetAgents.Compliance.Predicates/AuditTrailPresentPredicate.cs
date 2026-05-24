@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Compliance.Predicates;
 
 public sealed class AuditTrailPresentPredicate : CompliancePredicate

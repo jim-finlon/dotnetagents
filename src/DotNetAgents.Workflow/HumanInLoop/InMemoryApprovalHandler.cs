@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
@@ -138,8 +140,8 @@ public class InMemoryApprovalHandler<TState> : IApprovalHandler<TState> where TS
     /// <summary>
     /// Represents an approval request.
     /// </summary>
-    /// <typeparam name="TState">The type of the workflow state.</typeparam>
-    public class ApprovalRequest<TState> where TState : class
+    /// <typeparam name="TApprovalState">The type of the workflow state.</typeparam>
+    public class ApprovalRequest<TApprovalState> where TApprovalState : class
     {
         /// <summary>
         /// Gets the workflow run ID.
@@ -154,7 +156,7 @@ public class InMemoryApprovalHandler<TState> : IApprovalHandler<TState> where TS
         /// <summary>
         /// Gets the workflow state at the time of the request.
         /// </summary>
-        public TState State { get; init; } = null!;
+        public TApprovalState State { get; init; } = null!;
 
         /// <summary>
         /// Gets the optional message describing what needs approval.

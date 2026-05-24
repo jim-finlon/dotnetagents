@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Concurrent;
 
 namespace DotNetAgents.Voice.IntentClassification;
@@ -104,7 +106,9 @@ public class IntentTaxonomyRegistry : IIntentTaxonomyRegistry
         }
 
         // Fallback to static taxonomy
+#pragma warning disable CS0618 // Backward-compatible static taxonomy seeds are intentionally mirrored here.
         return IntentTaxonomy.DomainToService.GetValueOrDefault(domain);
+#pragma warning restore CS0618
     }
 
     private IntentDefinition? GetIntentDefinition(string domain, string action, string? subType)
@@ -135,6 +139,7 @@ public class IntentTaxonomyRegistry : IIntentTaxonomyRegistry
 
     private void RegisterDefaultIntents()
     {
+#pragma warning disable CS0618 // Registry bootstraps from the legacy static defaults without exposing obsolete members to callers.
         // Register default domains
         foreach (var domain in IntentTaxonomy.DomainNames)
         {
@@ -149,6 +154,7 @@ public class IntentTaxonomyRegistry : IIntentTaxonomyRegistry
             var optionalParams = IntentTaxonomy.OptionalParameters.GetValueOrDefault(intentKey, Array.Empty<string>());
             RegisterIntent(domain, action, subType, requiredParams.ToArray(), optionalParams.ToArray());
         }
+#pragma warning restore CS0618
     }
 
     private static (string Domain, string Action, string? SubType) ParseIntentKey(string intentKey)

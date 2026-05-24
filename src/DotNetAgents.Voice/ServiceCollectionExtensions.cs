@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Abstractions.Models;
 using DotNetAgents.Voice.IntentClassification;
 using DotNetAgents.Voice.Notifications;

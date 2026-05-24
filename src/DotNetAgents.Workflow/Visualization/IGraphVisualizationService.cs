@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Workflow.Graph;
 
 namespace DotNetAgents.Workflow.Visualization;

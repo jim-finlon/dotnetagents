@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Abstractions.PublicSubstitutes.Session;
 
 /// <summary>
 /// Stores small public-agent session snapshots. Implementations may be
-/// in-memory, local file-backed, premium, or private-factory backed.
+/// in-memory, local file-backed, hosted, or vendor-backed.
 /// </summary>
 public interface IPublicSessionStore
 {

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Abstractions.Intent;
 using DotNetAgents.Mcp.Routing;
 using DotNetAgents.Voice.BehaviorTrees;
@@ -404,7 +406,7 @@ public class CommandWorkflowOrchestrator : ICommandWorkflowOrchestrator
                 mcpParameters["orchestration.confirmed"] = state.Confirmed;
                 if (!string.IsNullOrWhiteSpace(state.UserMemoryContext))
                 {
-                    mcpParameters[IntentParameterKeys.JarvisUserMemory] = state.UserMemoryContext!;
+                    mcpParameters[IntentParameterKeys.UserMemoryContext] = state.UserMemoryContext!;
                 }
 
                 try

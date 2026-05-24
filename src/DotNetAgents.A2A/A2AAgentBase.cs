@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.A2A;
 
 /// <summary>Base implementation: card from constructor, HandleTaskAsync dispatches by skill to a delegate; StreamTaskAsync yields one completion event. FR-A2A-002.</summary>

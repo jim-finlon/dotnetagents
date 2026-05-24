@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Agents.ControlLoops;
 
 // Story 121a8afc. Canonical control-loop composition contracts. Service-agnostic

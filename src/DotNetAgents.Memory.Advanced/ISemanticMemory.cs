@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Memory.Advanced;
 
 /// <summary>Semantic memory: facts (triples), query, contradiction check. FR-MEM-002.</summary>

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Mcp.Server.Authentication;
 
 /// <summary>
@@ -5,20 +7,20 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 /// from <see cref="IPkceChallengeStore"/> (which is the short-lived
 /// authorization-code → code-challenge map): consent records persist across
 /// many auth codes so re-prompts only fire on (a) scope expansion, (b)
-/// operator-cleared consent, or (c) deliberate <c>prompt=consent</c> on the
+/// operator-revoked consent, or (c) deliberate <c>prompt=consent</c> on the
 /// authorize URL.
 /// </summary>
 /// <remarks>
-/// <para>The default in-memory store is fine for single-replica deployments.
-/// Multi-replica services need a shared store so a consent recorded on
-/// replica A is visible from replica B. DB-backed implementations land in a
-/// follow-up story; this one ships the contract + in-memory default.</para>
+/// <para>The default in-memory store is fine for lab deployments. Core 4
+/// services that need restart-surviving consent decisions should opt into a
+/// durable implementation so a consent recorded before redeploy is still
+/// visible after process restart.</para>
 /// </remarks>
 public interface IPkceConsentStore
 {
     /// <summary>
     /// Record an Allow / Deny decision. If a record already exists for the
-    /// (actor, client, service) tuple, replace it; consent decisions are
+    /// (actor, client, service) tuple, replace it; active consent decisions are
     /// last-write-wins.
     /// </summary>
     Task RecordAsync(PkceConsentRecord decision, CancellationToken cancellationToken = default);
@@ -33,10 +35,14 @@ public interface IPkceConsentStore
         string actorId,
         string clientId,
         IReadOnlyCollection<string> requestedScopes,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default,
+        string? serviceName = null);
 
-    /// <summary>List active (non-expired) consent records for the operator audit surface.</summary>
-    Task<IReadOnlyList<PkceConsentRecord>> ListAsync(string? actorIdFilter = null, CancellationToken cancellationToken = default);
+    /// <summary>List consent records for the operator audit surface.</summary>
+    Task<IReadOnlyList<PkceConsentRecord>> ListAsync(
+        string? actorIdFilter = null,
+        bool includeRevoked = false,
+        CancellationToken cancellationToken = default);
 
     /// <summary>Revoke a single consent by id. Idempotent; missing records are a no-op.</summary>
     Task RevokeAsync(Guid consentId, CancellationToken cancellationToken = default);
@@ -46,10 +52,12 @@ public interface IPkceConsentStore
 /// <param name="Id">Stable identifier for revoke + audit.</param>
 /// <param name="ActorId">The operator (or actor) that made the decision.</param>
 /// <param name="ClientId">CIMD-resolved or legacy client id the consent applies to.</param>
+/// <param name="ServiceName">The MCP service this consent applies to. Same actor + client consent does not cross service boundaries.</param>
 /// <param name="Scopes">Scopes the operator authorized at decision time. Future authorize requests subset of this list skip the prompt; superset triggers re-prompt.</param>
 /// <param name="Decision">Allow or Deny.</param>
 /// <param name="GrantedAtUtc">When the decision was made.</param>
 /// <param name="ExpiresAtUtc">When the decision expires; null = no expiry (operator must explicitly revoke).</param>
+/// <param name="RevokedAtUtc">When an operator revoked this record; null means active until expiry.</param>
 public sealed record PkceConsentRecord(
     Guid Id,
     string ActorId,
@@ -57,7 +65,9 @@ public sealed record PkceConsentRecord(
     IReadOnlyList<string> Scopes,
     PkceConsentDecision Decision,
     DateTimeOffset GrantedAtUtc,
-    DateTimeOffset? ExpiresAtUtc = null);
+    DateTimeOffset? ExpiresAtUtc = null,
+    string ServiceName = "",
+    DateTimeOffset? RevokedAtUtc = null);
 
 public enum PkceConsentDecision
 {

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Memory.Advanced;
 
 public enum AgentMemoryLayer

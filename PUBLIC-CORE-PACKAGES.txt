@@ -22,6 +22,7 @@ DotNetAgents.Agents.WorkerPool
 DotNetAgents.Analyzers
 DotNetAgents.CLI
 DotNetAgents.Channels
+DotNetAgents.CognitiveMesh
 DotNetAgents.Compliance.Predicates
 DotNetAgents.Configuration
 DotNetAgents.ContextIntent
@@ -33,6 +34,7 @@ DotNetAgents.Ecosystem
 DotNetAgents.Edge
 DotNetAgents.Gateway
 DotNetAgents.Governance
+DotNetAgents.Hosting
 DotNetAgents.Knowledge
 DotNetAgents.LaneOps
 DotNetAgents.Mcp

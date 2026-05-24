@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.AgenticRAG;
 
 /// <summary>Decision from Self-RAG: whether to retrieve or skip for the given query/context.</summary>

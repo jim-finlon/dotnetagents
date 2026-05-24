@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Memory.Advanced;
 
 /// <summary>Procedural memory: learn/recall/refine procedures. FR-MEM-003.</summary>

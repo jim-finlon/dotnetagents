@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Mcp.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -96,7 +98,7 @@ public static class LearningProjectionBinder
         };
     }
 
-    /// <summary>Parse configuration Kind strings (neutral public names plus legacy private-factory aliases).</summary>
+    /// <summary>Parse configuration Kind strings (neutral public names plus legacy hosted-service aliases).</summary>
     public static LearningProjectionTargetKind ParseTargetKind(string? kind) =>
         kind?.Trim() switch
         {

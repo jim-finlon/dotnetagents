@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Concurrent;
 
 namespace DotNetAgents.Mcp.Server.Authentication;
@@ -5,9 +7,8 @@ namespace DotNetAgents.Mcp.Server.Authentication;
 /// <summary>
 /// Story 1095b26a. Default <see cref="IPkceConsentStore"/> for single-replica
 /// MCP servers. Concurrent-dictionary keyed on consent id; lookup via a
-/// linear scan over (actor, client) which is fine at the operator-scale
-/// volumes the consent surface sees. DB-backed implementations land in a
-/// follow-up story for multi-replica deployments.
+/// linear scan over (actor, client, service) which is fine at the
+/// operator-scale volumes the consent surface sees.
 /// </summary>
 public sealed class InMemoryPkceConsentStore : IPkceConsentStore
 {
@@ -27,18 +28,20 @@ public sealed class InMemoryPkceConsentStore : IPkceConsentStore
         if (string.IsNullOrWhiteSpace(decision.ClientId))
             throw new ArgumentException("ClientId is required.", nameof(decision));
 
-        // Last-write-wins: drop any prior decision for the same (actor, client) tuple,
-        // then insert the new one. Lookup remains O(N) over a small set.
+        var normalized = Normalize(decision);
+
+        // Last-write-wins: revoke any prior active decision for the same
+        // (actor, client, service) tuple, then insert the new one. Revoked
+        // decisions remain available for audit when includeRevoked=true.
         foreach (var (id, existing) in _records)
         {
-            if (string.Equals(existing.ActorId, decision.ActorId, StringComparison.Ordinal)
-                && string.Equals(existing.ClientId, decision.ClientId, StringComparison.Ordinal))
+            if (IsSameConsentSubject(existing, normalized) && existing.RevokedAtUtc is null)
             {
-                _records.TryRemove(id, out _);
+                _records[id] = existing with { RevokedAtUtc = _clock.GetUtcNow() };
             }
         }
 
-        _records[decision.Id] = decision;
+        _records[normalized.Id] = normalized;
         return Task.CompletedTask;
     }
 
@@ -46,7 +49,8 @@ public sealed class InMemoryPkceConsentStore : IPkceConsentStore
         string actorId,
         string clientId,
         IReadOnlyCollection<string> requestedScopes,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default,
+        string? serviceName = null)
     {
         if (string.IsNullOrWhiteSpace(actorId) || string.IsNullOrWhiteSpace(clientId))
             return Task.FromResult<PkceConsentRecord?>(null);
@@ -57,6 +61,8 @@ public sealed class InMemoryPkceConsentStore : IPkceConsentStore
         {
             if (!string.Equals(record.ActorId, actorId, StringComparison.Ordinal)) continue;
             if (!string.Equals(record.ClientId, clientId, StringComparison.Ordinal)) continue;
+            if (!string.Equals(NormalizeServiceName(record.ServiceName), NormalizeServiceName(serviceName), StringComparison.Ordinal)) continue;
+            if (record.RevokedAtUtc is not null) continue;
             if (record.ExpiresAtUtc is { } expiry && expiry <= now) continue;
             if (record.Decision != PkceConsentDecision.Allow) continue;
 
@@ -72,11 +78,19 @@ public sealed class InMemoryPkceConsentStore : IPkceConsentStore
         return Task.FromResult<PkceConsentRecord?>(null);
     }
 
-    public Task<IReadOnlyList<PkceConsentRecord>> ListAsync(string? actorIdFilter = null, CancellationToken cancellationToken = default)
+    public Task<IReadOnlyList<PkceConsentRecord>> ListAsync(
+        string? actorIdFilter = null,
+        bool includeRevoked = false,
+        CancellationToken cancellationToken = default)
     {
         var now = _clock.GetUtcNow();
         IEnumerable<PkceConsentRecord> records = _records.Values
             .Where(r => r.ExpiresAtUtc is null || r.ExpiresAtUtc.Value > now);
+
+        if (!includeRevoked)
+        {
+            records = records.Where(r => r.RevokedAtUtc is null);
+        }
 
         if (!string.IsNullOrWhiteSpace(actorIdFilter))
         {
@@ -90,7 +104,22 @@ public sealed class InMemoryPkceConsentStore : IPkceConsentStore
 
     public Task RevokeAsync(Guid consentId, CancellationToken cancellationToken = default)
     {
-        _records.TryRemove(consentId, out _);
+        if (_records.TryGetValue(consentId, out var existing) && existing.RevokedAtUtc is null)
+        {
+            _records[consentId] = existing with { RevokedAtUtc = _clock.GetUtcNow() };
+        }
+
         return Task.CompletedTask;
     }
+
+    private static PkceConsentRecord Normalize(PkceConsentRecord record) =>
+        record with { ServiceName = NormalizeServiceName(record.ServiceName) };
+
+    private static string NormalizeServiceName(string? serviceName) =>
+        string.IsNullOrWhiteSpace(serviceName) ? "DNA MCP" : serviceName.Trim();
+
+    private static bool IsSameConsentSubject(PkceConsentRecord left, PkceConsentRecord right) =>
+        string.Equals(left.ActorId, right.ActorId, StringComparison.Ordinal)
+        && string.Equals(left.ClientId, right.ClientId, StringComparison.Ordinal)
+        && string.Equals(NormalizeServiceName(left.ServiceName), NormalizeServiceName(right.ServiceName), StringComparison.Ordinal);
 }

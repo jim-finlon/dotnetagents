@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # State Machine Integration Files
 
 **Note**: These files have been moved to avoid circular dependencies.

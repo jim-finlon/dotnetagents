@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Mcp.Server
 
 ASP.NET Core extensions for exposing MCP server endpoints so agents can implement the MCP HTTP contract (GET `/mcp/tools`, POST `/mcp/tools/call`) by implementing a single interface.

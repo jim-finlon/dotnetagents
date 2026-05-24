@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.ModelRouting;
 
 /// <summary>Cascade router: try tiers in order, escalate on low confidence. FR-MR-001.</summary>

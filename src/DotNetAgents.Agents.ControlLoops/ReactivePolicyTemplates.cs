@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Agents.BehaviorTrees;
 
 namespace DotNetAgents.Agents.ControlLoops;

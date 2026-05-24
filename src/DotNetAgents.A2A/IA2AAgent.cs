@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.A2A;
 
 /// <summary>A2A agent: card and task handling. FR-A2A-001, FR-A2A-002.</summary>

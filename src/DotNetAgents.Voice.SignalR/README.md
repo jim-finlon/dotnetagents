@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # DotNetAgents.Voice.SignalR
 
 Real-time SignalR notifications for voice command processing in DotNetAgents, enabling JARVIS-like real-time status updates.

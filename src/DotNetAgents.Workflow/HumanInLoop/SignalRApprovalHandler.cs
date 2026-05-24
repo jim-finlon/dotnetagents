@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using Microsoft.Extensions.Logging;
 
 namespace DotNetAgents.Workflow.HumanInLoop;
@@ -72,7 +74,7 @@ public class SignalRApprovalHandler<TState> : IApprovalHandler<TState> where TSt
                         var allProperty = clients?.GetType().GetProperty("All");
                         var all = allProperty?.GetValue(clients);
                         var sendAsyncOnAll = all?.GetType().GetMethod("SendAsync");
-                        sendAsyncOnAll?.Invoke(all, new object[] { "ApprovalRequested", workflowRunId, nodeName, message, cancellationToken });
+                        sendAsyncOnAll?.Invoke(all, new object[] { "ApprovalRequested", workflowRunId, nodeName, message ?? string.Empty, cancellationToken });
                     }
                 }
             }

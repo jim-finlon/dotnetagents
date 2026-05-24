@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 namespace DotNetAgents.Workflow.DecisionGraph;
 
 /// <summary>
@@ -5,7 +7,7 @@ namespace DotNetAgents.Workflow.DecisionGraph;
 /// Story 67a5c613. The runtime is intentionally agnostic about persistence —
 /// production callers (JARVIS) wire this to the <c>jarvis_decision_graph_runs</c>
 /// + <c>jarvis_decision_graph_run_events</c> tables via a JARVIS-side adapter
-/// over <see cref="IDecisionGraphRepository"/> (story 0838c66b). Tests use the
+/// over a decision-graph repository adapter. Tests use the
 /// in-memory recorder below.
 /// </summary>
 public interface IDecisionGraphTraceRecorder

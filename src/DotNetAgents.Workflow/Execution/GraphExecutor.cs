@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 using DotNetAgents.Abstractions.Exceptions;
 using DotNetAgents.Abstractions.Execution;
 using DotNetAgents.Workflow.Checkpoints;
