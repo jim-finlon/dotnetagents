@@ -27,6 +27,10 @@ Commercial layers can build on the public core with:
 - enterprise governance packs
 - certification receipts
 - hosted evaluation and evidence
+- semi- or fully automatic self-improving software factory operation, with
+  human-in-the-loop review available where teams want it
+- laboratory, simulator, and Arena environments for hardening agents before
+  production use
 - vertical templates
 - support and private package feeds
 

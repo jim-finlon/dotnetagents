@@ -190,9 +190,10 @@ The same public primitives are leveraged in our private agent repositories to
 run governed delivery, evaluation, memory, and operations workflows at a larger
 scale. Premium packages such as DNA Factory build on DotNetAgents with managed
 labs, evaluation evidence, certification receipts, premium plugins, hosted
-agent operations, and opinionated governance packs. The public core shows the
-foundation; the premium layer is for teams that want the operating system
-around it.
+agent operations, and a semi- or fully automatic self-improving software
+factory where human review can stay in the loop when teams want it. The public
+core shows the foundation; the premium layer is for teams that want the
+operating system around it.
 
 ## Roadmap
 
@@ -213,8 +214,10 @@ Public roadmap highlights:
 
 Premium/private roadmap highlights:
 
-- DNA Factory managed delivery, release evidence, and agent-operations layers
-- premium evaluation, lab, and Arena packs for governed agent improvement
+- DNA Factory managed delivery, release evidence, and autonomous software
+  factory layers
+- premium evaluation, lab, simulator, and Arena packs for hardening agents
+  before they reach production workflows
 - commercial governance, compliance, credential, audit, and certification packs
 - advanced model-routing and optimization packages used by private agent teams
 - vertical agent templates and integration packs for customers who want a
