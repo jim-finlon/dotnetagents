@@ -29,6 +29,7 @@ Feature guides:
 - [State Machines](features/state-machines.md)
 - [Behavior Trees](features/behavior-trees.md)
 - [Workflows](features/workflows.md)
+- [Orchestration](features/orchestration.md)
 - [Runtime Trajectories](features/runtime-trajectories.md)
 - [Structured Output](features/structured-output.md)
 - [Memory](features/memory.md)
