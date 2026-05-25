@@ -41,7 +41,7 @@ services.AddMcpClients(options =>
     });
 
     // Add another service
-    options.AddService("time_management", "https://api.time.example.com");
+    options.AddService("calendar_service", "https://api.calendar.example.com");
 });
 ```
 

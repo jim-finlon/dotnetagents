@@ -2,7 +2,9 @@
 
 # DotNetAgents.Voice
 
-Voice command processing package for DotNetAgents, enabling natural language voice command classification and parsing for JARVIS-like AI assistants.
+Voice command processing package for DotNetAgents, enabling natural language
+voice command classification and parsing for assistant-style agent
+applications.
 
 ## Features
 
@@ -70,7 +72,7 @@ var intent = await classifier.ClassifyAsync("schedule meeting with John tomorrow
 // - Domain: "calendar"
 // - Action: "create_event"
 // - Parameters: { "attendee": "John", "date": "tomorrow", "time": "2pm" }
-// - TargetService: "time_management"
+// - TargetService: "calendar_service"
 ```
 
 ## Intent Taxonomy

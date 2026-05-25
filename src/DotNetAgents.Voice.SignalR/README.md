@@ -2,7 +2,8 @@
 
 # DotNetAgents.Voice.SignalR
 
-Real-time SignalR notifications for voice command processing in DotNetAgents, enabling JARVIS-like real-time status updates.
+Real-time SignalR notifications for voice command processing in DotNetAgents,
+enabling assistant-style real-time status updates.
 
 ## Features
 

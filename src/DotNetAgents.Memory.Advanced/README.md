@@ -10,10 +10,10 @@ working memory, layered memory, and bounded prompt-memory snapshots.
 `BoundedMemorySnapshot` is a lightweight prompt-assembly input. It is not the
 durable memory source of truth.
 
-- **AiSessionPersistence** remains authoritative for resumable session context,
+- A durable session store remains authoritative for resumable session context,
   tasks, and continuity state.
-- **KnowledgeMemory** remains authoritative for reusable cross-project lessons and
-  patterns.
+- A governed knowledge store remains authoritative for reusable cross-project
+  lessons and patterns.
 - **Bounded prompt memory** is a small, policy-checked snapshot assembled for a
   model turn and safe to inject into prompt context under a configured character
   or token budget.
@@ -32,5 +32,6 @@ Key contracts:
 
 Runtime sessions should bind transcript documents to the originating
 `AgentSession.Id` and, when coming from a gateway channel, the
-`GatewaySessionKey.StableKey` metadata. Core 4 sync should happen outside this
-package through AiSessionPersistence and KnowledgeMemory clients.
+`GatewaySessionKey.StableKey` metadata. Durable synchronization should happen
+outside this package through your application's session and knowledge-store
+clients.
