@@ -146,6 +146,21 @@ Then choose the pattern you need:
 
 For complete starter projects, use the companion examples repository.
 
+## Documentation
+
+The `/docs` tree is the practical guide for using the public platform:
+
+- [Getting Started](docs/getting-started.md) shows the first application shape
+  and safe tool patterns.
+- [Core Concepts](docs/core-concepts.md) explains the why behind the runtime,
+  workflow, tool, protocol, governance, and evidence model.
+- [Package Map](docs/package-map.md) helps you choose packages by job.
+- [MCP and A2A](docs/mcp-and-a2a.md) explains which protocol surface to expose.
+- [Governance and Observability](docs/governance-and-observability.md) covers
+  approval, policy, telemetry, and evidence.
+- [Open Core and Premium Path](docs/open-core-and-premium.md) explains what is
+  public, what is optional, and what belongs in commercial layers.
+
 ## Comparison
 
 If you are deciding whether DotNetAgents belongs in your stack, read
