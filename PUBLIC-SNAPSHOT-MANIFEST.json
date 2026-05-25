@@ -2,7 +2,7 @@
   "buildDeferredPublicCorePackages": [],
   "category": "public-core",
   "notes": [
-    "Private staging snapshot only.",
+    "Public release candidate snapshot.",
     "Public-plugin and non-public package categories are intentionally excluded.",
     "Removed ProjectReference edges must be replaced by package references, public abstractions, or package splits before final public release if source compilation requires them."
   ],

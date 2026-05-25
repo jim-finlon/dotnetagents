@@ -22,16 +22,15 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)NOTICE" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <!--
       Pin System.Security.Cryptography.Xml to a patched release for the
       DotNetAgents.Documents project. Without this pin the public-core build
       surfaces NU1903 advisories (GHSA-37gx-xxp4-5rgx / GHSA-w3x6-4m5h-cxqf)
-      via the DocumentFormat.OpenXml transitive graph. Mirrors the private
-      source Directory.Build.props pin; remove once upstream Document packages
-      stop pulling the vulnerable transitive themselves. Tracked under SDLC
-      story c845ee14.
+      via the DocumentFormat.OpenXml transitive graph. Remove once upstream
+      Document packages stop pulling the vulnerable transitive themselves.
     -->
     <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.6" Condition="'$(MSBuildProjectName)' == 'DotNetAgents.Documents'" />
   </ItemGroup>

@@ -1,9 +1,21 @@
-# DotNetAgents Public Core
+# DotNetAgents
 
-This is a private staging snapshot for the future public DotNetAgents framework
-repository. It contains only packages classified as public-core in the open-core
-inventory and is used for audit before content is copied into a public repo.
+DotNetAgents is a .NET agent framework for building composable agents, tools,
+workflows, MCP/A2A surfaces, runtime hosting, memory, routing, observability,
+and governance primitives.
 
-Do not push this staging tree directly to a public remote. Run the package graph
-scanner, public-content audit, license/header checks, and operator approval gate
-first.
+This repository contains the public core package surface. Optional adapters and
+integration packages live in `dotnetagents-plugins`; runnable starter projects
+and sample applications live in `dotnetagents-examples`.
+
+## Package Train
+
+The public package train currently uses `1.0.0-preview.1` while the API and
+release process are being hardened. Packages target .NET 10 and use Apache-2.0
+license metadata.
+
+## Public Release Status
+
+The source here is intended for public distribution after the release gate has
+completed. The GitHub mirror is intentionally deferred until documentation,
+legal/operator approval, and publication automation are ready.
