@@ -11,7 +11,7 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
     <IsPackable>true</IsPackable>
     <PackageId>DotNetAgents</PackageId>
-    <Description>Metapackage that references many DotNetAgents library packages for convenience; it is not an MCP host—use DotNetAgents.Mcp / DotNetAgents.Mcp.Server in an application project or the dna-service template.</Description>
+    <Description>Metapackage that references the core DotNetAgents library packages for convenience; it is not an MCP host--use DotNetAgents.Mcp / DotNetAgents.Mcp.Server in an application project.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,30 +38,6 @@
     <ProjectReference Include="..\DotNetAgents.Agents.Marketplace\DotNetAgents.Agents.Marketplace.csproj" />
     <ProjectReference Include="..\DotNetAgents.Mcp\DotNetAgents.Mcp.csproj" />
     <ProjectReference Include="..\DotNetAgents.Edge\DotNetAgents.Edge.csproj" />
-
-
-
-
-
-
-    <PackageReference Include="DotNetAgents.Storage.TaskKnowledge.PostgreSQL" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Storage.TaskKnowledge.PostgreSQL\DotNetAgents.Storage.PostgreSQL.csproj')" />
-    <PackageReference Include="DotNetAgents.Storage.TaskKnowledge.SqlServer" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Storage.TaskKnowledge.SqlServer\DotNetAgents.Storage.SqlServer.csproj')" />
-    <PackageReference Include="DotNetAgents.Storage.Agents.PostgreSQL" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Storage.Agents.PostgreSQL\DotNetAgents.Storage.Agents.PostgreSQL.csproj')" />
-
-
-    <PackageReference Include="DotNetAgents.VectorStores.Pinecone" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Pinecone\DotNetAgents.VectorStores.Pinecone.csproj')" />
-    <PackageReference Include="DotNetAgents.VectorStores.PostgreSQL" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.PostgreSQL\DotNetAgents.VectorStores.PostgreSQL.csproj')" />
-    <PackageReference Include="DotNetAgents.VectorStores.Weaviate" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Weaviate\DotNetAgents.VectorStores.Weaviate.csproj')" />
-    <PackageReference Include="DotNetAgents.VectorStores.Qdrant" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Qdrant\DotNetAgents.VectorStores.Qdrant.csproj')" />
-    <PackageReference Include="DotNetAgents.VectorStores.Chroma" Version="1.0.0" Condition="!Exists('..\DotNetAgents.VectorStores.Chroma\DotNetAgents.VectorStores.Chroma.csproj')" />
-
-
-    <PackageReference Include="DotNetAgents.Agents.Messaging.RabbitMQ" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.RabbitMQ\DotNetAgents.Agents.Messaging.RabbitMQ.csproj')" />
-    <PackageReference Include="DotNetAgents.Agents.Messaging.Kafka" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.Kafka\DotNetAgents.Agents.Messaging.Kafka.csproj')" />
-    <PackageReference Include="DotNetAgents.Agents.Messaging.Redis" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.Redis\DotNetAgents.Agents.Messaging.Redis.csproj')" />
-    <PackageReference Include="DotNetAgents.Agents.Messaging.SignalR" Version="1.0.0" Condition="!Exists('..\DotNetAgents.Agents.Messaging.SignalR\DotNetAgents.Agents.Messaging.SignalR.csproj')" />
-
-
 
     </ItemGroup>
 
