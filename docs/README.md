@@ -18,6 +18,23 @@ Start here:
 6. [Open Core and Premium Path](open-core-and-premium.md) - understand what is
    public, what is optional, and what belongs in commercial layers.
 
+Tutorials:
+
+- [First MCP Tool Server](tutorials/first-mcp-tool-server.md)
+- [First Workflow Agent](tutorials/first-workflow-agent.md)
+- [First Governed Preview/Confirm Action](tutorials/first-preview-confirm-action.md)
+
+Feature guides:
+
+- [State Machines](features/state-machines.md)
+- [Behavior Trees](features/behavior-trees.md)
+- [Workflows](features/workflows.md)
+- [Runtime Trajectories](features/runtime-trajectories.md)
+- [Structured Output](features/structured-output.md)
+- [Memory](features/memory.md)
+- [Model Routing](features/model-routing.md)
+- [Observability](features/observability.md)
+
 Companion docs:
 
 - Plugins: `dotnetagents-plugins/docs`
