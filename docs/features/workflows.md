@@ -35,6 +35,17 @@ public interface IWorkflowStep<TState>
 
 Each step should have a small contract and clear failure behavior.
 
+## Runnable Example
+
+The public examples repository includes a local checkpoint/resume workflow:
+
+```bash
+dotnet run --project examples/control-loops -- workflow
+```
+
+It pauses at an approval step, records the next step id, resumes from that
+checkpoint, and emits a public result envelope.
+
 ## Implementation Checklist
 
 - model state explicitly

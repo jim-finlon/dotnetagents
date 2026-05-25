@@ -40,6 +40,16 @@ public sealed record TicketContext(
 Define transitions separately from model reasoning. The agent may recommend a
 transition; the state machine decides whether it is valid.
 
+## Runnable Example
+
+The public examples repository includes a local support-ticket state machine:
+
+```bash
+dotnet run --project examples/control-loops -- state-machine
+```
+
+It uses `AgentStateMachine<T>` with guarded transitions and transition history.
+
 ## Implementation Checklist
 
 - define states as a closed set

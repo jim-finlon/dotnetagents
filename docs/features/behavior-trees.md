@@ -38,6 +38,17 @@ var tree = Selector(
 The exact builder API may change during preview, but the pattern is stable:
 conditions are cheap and side-effect-free; actions are explicit and bounded.
 
+## Runnable Example
+
+The public examples repository includes a local support-policy behavior tree:
+
+```bash
+dotnet run --project examples/control-loops -- behavior-tree
+```
+
+It uses selector, sequence, condition, and action nodes to pick a next action
+with a fallback branch.
+
 ## Implementation Checklist
 
 - keep conditions side-effect-free
