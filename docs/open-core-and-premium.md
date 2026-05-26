@@ -30,7 +30,9 @@ Commercial layers can build on the public core with:
 - semi- or fully automatic self-improving software factory operation, with
   human-in-the-loop review available where teams want it
 - laboratory, simulator, and Arena environments for hardening agents before
-  production use
+  production use (Note: The public repository includes a safe, offline `sales-arena`
+  teaser that demonstrates ledger events, leaderboard computation, and replay
+  reporting without exposing proprietary scoring, datasets, or genetic optimizer mechanics)
 - vertical templates
 - support and private package feeds
 
